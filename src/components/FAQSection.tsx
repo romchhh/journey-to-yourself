@@ -27,7 +27,7 @@ const FAQSection = () => {
                 onClick={() => toggleFaq(index)}
                 className="w-full px-8 py-6 flex items-center justify-between text-left transition-colors hover:bg-gray-50 rounded-2xl relative z-10"
               >
-                <span className="text-lg md:text-xl font-black pr-4" style={{ color: '#0C5C38' }}>
+                <span className="text-lg md:text-xl font-black pr-4 uppercase" style={{ color: '#0C5C38' }}>
                   {item.question}
                 </span>
                 <div 
@@ -46,7 +46,7 @@ const FAQSection = () => {
               {openFaq === index && (
                 <div className="px-8 pb-8 pt-2 relative z-10">
                   <div className="pl-4 border-l-4" style={{ borderColor: '#75DEAF' }}>
-                    <p className="text-base md:text-lg leading-relaxed font-medium" style={{ color: '#2F2F2F' }}>
+                    <p className="text-base md:text-lg leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
                       {item.answer}
                     </p>
                   </div>

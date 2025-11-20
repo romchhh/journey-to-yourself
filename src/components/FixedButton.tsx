@@ -24,7 +24,7 @@ const FixedButton = () => {
   return (
     <button
       onClick={() => handlePayment()}
-      className="fixed right-6 bottom-6 z-50 px-8 py-4 rounded-full text-base font-bold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 flex items-center gap-2 animate-fade-in-up focus:outline-none focus:ring-4 focus:ring-[#75DEAF] focus:ring-offset-2 border-2 bg-white/95 backdrop-blur-sm"
+      className="fixed right-6 bottom-6 z-50 px-8 py-4 rounded-full text-base font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 flex items-center gap-2 animate-fade-in-up focus:outline-none focus:ring-4 focus:ring-[#75DEAF] focus:ring-offset-2 border-2 bg-white/95 backdrop-blur-sm"
       style={{ 
         borderColor: '#0C5C38',
         color: '#0C5C38',

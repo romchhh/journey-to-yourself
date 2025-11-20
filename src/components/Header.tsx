@@ -92,7 +92,7 @@ const Header = () => {
         <div className="hidden md:flex items-center">
         <button 
           onClick={() => handlePayment()}
-            className="px-8 py-3 rounded-full text-base font-bold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 flex items-center gap-2 group focus:outline-none focus:ring-4 focus:ring-[#75DEAF] focus:ring-offset-2 border-2"
+            className="px-8 py-3 rounded-full text-base font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 flex items-center gap-2 group focus:outline-none focus:ring-4 focus:ring-[#75DEAF] focus:ring-offset-2 border-2"
           style={{ 
               borderColor: '#0C5C38',
               color: '#0C5C38',
@@ -152,13 +152,13 @@ const Header = () => {
           <div className="flex flex-col gap-6 max-w-md mx-auto w-full">
             <button
               onClick={() => scrollToSection('about')}
-              className="text-left px-6 py-5 text-2xl font-bold text-white focus:outline-none focus:ring-2 focus:ring-[#75DEAF] focus:ring-offset-2"
+              className="text-left px-6 py-5 text-2xl font-black uppercase text-white focus:outline-none focus:ring-2 focus:ring-[#75DEAF] focus:ring-offset-2"
             >
               Про практикум
             </button>
             <button
               onClick={() => scrollToSection('author')}
-              className="text-left px-6 py-5 text-2xl font-bold text-white focus:outline-none focus:ring-2 focus:ring-[#75DEAF] focus:ring-offset-2"
+              className="text-left px-6 py-5 text-2xl font-black uppercase text-white focus:outline-none focus:ring-2 focus:ring-[#75DEAF] focus:ring-offset-2"
             >
               Про авторку
             </button>
@@ -168,7 +168,7 @@ const Header = () => {
                   handlePayment();
                   setIsMobileMenuOpen(false);
                 }}
-                className="w-full px-8 py-5 rounded-full text-white text-xl font-bold transition-all hover:bg-white/10 flex items-center justify-center gap-3 focus:outline-none focus:ring-4 focus:ring-white/50 focus:ring-offset-2 border-2"
+                className="w-full px-8 py-5 rounded-full text-white text-xl font-semibold transition-all hover:bg-white/10 flex items-center justify-center gap-3 focus:outline-none focus:ring-4 focus:ring-white/50 focus:ring-offset-2 border-2"
                 style={{ 
                   borderColor: 'white',
                   backgroundColor: 'transparent',

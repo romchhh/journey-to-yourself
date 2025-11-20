@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="space-y-6">
             <button 
               onClick={() => handlePayment()}
-              className="px-8 py-4 rounded-full text-base font-bold transition-all hover:opacity-90 border-2 border-white/30 hover:border-white/50 hover:scale-105 transform shadow-lg flex items-center gap-2 group"
+              className="px-8 py-4 rounded-full text-base font-semibold transition-all hover:opacity-90 border-2 border-white/30 hover:border-white/50 hover:scale-105 transform shadow-lg flex items-center gap-2 group"
               style={{ 
                 background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%)',
                 backdropFilter: 'blur(10px)'
@@ -34,10 +34,10 @@ const Footer = () => {
                 alt="Anastasiia Zavadska" 
                 className="h-7 w-auto mb-4 brightness-0 invert opacity-90"
               />
-              <p className="text-sm opacity-80 mb-2 leading-relaxed">
+              <p className="text-sm opacity-80 mb-2 leading-relaxed font-semibold">
                 Практикум створено психологом Анастасією Завадською
               </p>
-              <p className="text-xs opacity-60">
+              <p className="text-xs opacity-60 font-semibold">
                 © Анастасія Завадська 2025
               </p>
             </div>
@@ -46,7 +46,7 @@ const Footer = () => {
           {/* Center Section */}
           <div className="flex items-center justify-center">
             <div className="text-center p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10">
-              <p className="text-sm opacity-90 mb-2 font-medium">Зв'язатись з нами</p>
+              <p className="text-sm opacity-90 mb-2 font-normal uppercase">Зв'язатись з нами</p>
               <a 
                 href="mailto:hello@anastasiiazavadska.com" 
                 className="text-base font-semibold hover:opacity-80 transition-opacity"
@@ -59,13 +59,13 @@ const Footer = () => {
           {/* Right Section */}
           <div className="space-y-6">
             <div className="flex flex-col gap-3">
-              <a href="/#about" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block">
+              <a href="/#about" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block font-semibold">
                 Про Практикум
               </a>
-              <a href="/#author" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block">
+              <a href="/#author" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block font-semibold">
                 Про Авторку
               </a>
-              <a href="/offer" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block">
+              <a href="/offer" className="text-sm opacity-80 hover:opacity-100 transition-opacity hover:translate-x-1 transform inline-block font-semibold">
                 Публічна Оферта
               </a>
             </div>
@@ -102,7 +102,7 @@ const Footer = () => {
               href="https://telebots.site/" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="font-bold hover:opacity-100 transition-opacity underline"
+              className="font-semibold hover:opacity-100 transition-opacity underline"
             >
               TeleBots
             </a>

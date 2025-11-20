@@ -15,27 +15,27 @@ const WhyImportantSection = () => {
         <div className="max-w-5xl mx-auto space-y-5 mb-20">
           <div className="p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-lg transition-all relative overflow-hidden group" style={{ borderColor: '#E5E5E5' }}>
             <div className="absolute top-0 left-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(-30%, -30%)' }}></div>
-            <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-medium" style={{ color: '#2F2F2F' }}>
+            <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-semibold" style={{ color: '#2F2F2F' }}>
               Більшість починають рік зі списку цілей і вимог до себе.
             </p>
           </div>
           <div className="p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-lg transition-all relative overflow-hidden group" style={{ borderColor: '#E5E5E5' }}>
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-            <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-medium" style={{ color: '#2F2F2F' }}>
+            <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-semibold" style={{ color: '#2F2F2F' }}>
               Але коли всередині немає ясності – плани не працюють.
             </p>
           </div>
           <div className="p-8 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all relative overflow-hidden group" style={{ backgroundColor: '#F0FDF4', borderColor: '#75DEAF' }}>
             <div className="absolute top-0 left-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(-25%, -25%)' }}></div>
             <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(25%, 25%)' }}></div>
-            <p className="text-xl md:text-2xl leading-relaxed text-center font-bold relative z-10" style={{ color: '#0C5C38' }}>
+            <p className="text-xl md:text-2xl leading-relaxed text-center font-black uppercase relative z-10" style={{ color: '#0C5C38' }}>
               Починати рік із виснаження – це продовжувати минулий сценарій.
             </p>
           </div>
           <div className="p-8 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all relative overflow-hidden group" style={{ backgroundColor: '#F0FDF4', borderColor: '#75DEAF' }}>
             <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(25%, -25%)' }}></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(-25%, 25%)' }}></div>
-            <p className="text-xl md:text-2xl leading-relaxed text-center font-bold relative z-10" style={{ color: '#0C5C38' }}>
+            <p className="text-xl md:text-2xl leading-relaxed text-center font-black uppercase relative z-10" style={{ color: '#0C5C38' }}>
               Починати з ясності – це створювати новий.
             </p>
           </div>
@@ -45,10 +45,10 @@ const WhyImportantSection = () => {
           <div className="absolute top-0 left-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(-20%, -20%)' }}></div>
           <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(20%, 20%)' }}></div>
           <div className="relative z-10">
-            <p className="text-2xl md:text-3xl font-black mb-4 text-center" style={{ color: '#0C5C38' }}>
+            <p className="text-2xl md:text-3xl font-black mb-4 text-center uppercase" style={{ color: '#0C5C38' }}>
               У цьому практикумі спочатку буде ясність → а потім план.
             </p>
-            <p className="text-xl md:text-2xl text-center font-semibold" style={{ color: '#2F2F2F' }}>
+            <p className="text-xl md:text-2xl text-center font-normal uppercase" style={{ color: '#0C5C38' }}>
               Не навпаки.
             </p>
           </div>
@@ -59,7 +59,7 @@ const WhyImportantSection = () => {
           <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(30%, 30%)' }}></div>
           <div className="relative z-10">
             <div className="text-center mb-10 p-6 bg-white rounded-2xl border-2 shadow-sm" style={{ borderColor: '#75DEAF' }}>
-              <h3 className="text-2xl md:text-3xl font-black" style={{ color: '#0C5C38' }}>
+              <h3 className="text-2xl md:text-3xl font-black uppercase" style={{ color: '#0C5C38' }}>
                 За 7 днів ти отримаєш власну карту року:
               </h3>
             </div>

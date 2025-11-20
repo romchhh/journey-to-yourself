@@ -13,15 +13,15 @@ const AboutSection = () => {
           <h2 className="text-4xl md:text-5xl font-black mb-3 uppercase">Про що цей практикум</h2>
           <div className="w-24 h-1 rounded-full mx-auto" style={{ backgroundColor: '#75DEAF' }}></div>
         </div>
-        <p className="text-xl md:text-2xl mb-6 leading-relaxed opacity-90">
+        <p className="text-xl md:text-2xl mb-6 leading-relaxed font-normal uppercase opacity-90">
           Це не курс і не марафон. Це 7–денна м'яка подорож до себе – через короткі тексти, запитання й практики, що повертають живість і внутрішній спокій.
         </p>
-        <p className="text-xl md:text-2xl mb-10 leading-relaxed opacity-90">
+        <p className="text-xl md:text-2xl mb-10 leading-relaxed font-normal uppercase opacity-90">
           Кожен день – маленькі кроки всередину себе, які дають ясність, сили й розуміння, куди йти далі.
         </p>
         
         <div className="mb-10">
-          <p className="text-xl md:text-2xl font-semibold mb-8">За 7 днів ти:</p>
+          <p className="text-xl md:text-2xl font-normal uppercase mb-8">За 7 днів ти:</p>
           <div className="grid md:grid-cols-2 gap-5">
             {aboutItems.map((item, index) => (
               <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all hover:scale-105 transform relative overflow-hidden group">
@@ -40,10 +40,10 @@ const AboutSection = () => {
           <div className="absolute top-0 left-0 w-32 h-32 rounded-full opacity-10" style={{ backgroundColor: '#75DEAF', transform: 'translate(-20%, -20%)' }}></div>
           <div className="absolute bottom-0 right-0 w-32 h-32 rounded-full opacity-10" style={{ backgroundColor: '#75DEAF', transform: 'translate(20%, 20%)' }}></div>
           <div className="relative z-10">
-            <p className="text-3xl md:text-4xl font-black mb-4 leading-tight">
+            <p className="text-3xl md:text-4xl font-black mb-4 leading-tight uppercase">
               Це не про те, щоб бути найкращою версією себе.
             </p>
-            <p className="text-3xl md:text-4xl font-black leading-tight">
+            <p className="text-3xl md:text-4xl font-black leading-tight uppercase">
               Це про те, щоб жити своїм життям, а не очікуваннями інших.
             </p>
           </div>
@@ -52,7 +52,7 @@ const AboutSection = () => {
         <div className="text-center">
           <button 
             onClick={() => handlePayment()}
-            className="px-12 py-6 rounded-full text-white text-xl font-bold transition-all hover:bg-white/10 shadow-xl hover:shadow-2xl transform hover:scale-105 flex items-center gap-3 mx-auto group border-2"
+            className="px-12 py-6 rounded-full text-white text-xl font-semibold transition-all hover:bg-white/10 shadow-xl hover:shadow-2xl transform hover:scale-105 flex items-center gap-3 mx-auto group border-2"
             style={{ 
               borderColor: 'white',
               backgroundColor: 'transparent',

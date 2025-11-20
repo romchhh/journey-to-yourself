@@ -13,7 +13,7 @@ const CTASection = () => {
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-black mb-4 leading-tight" style={{ color: '#0C5C38' }}>
+          <h2 className="text-3xl md:text-4xl font-black mb-4 leading-tight uppercase" style={{ color: '#0C5C38' }}>
             Якщо хочеш почати рік не з тиску й списків "потрібно", а з ясності, опори й відчуття себе – це твій старт.
           </h2>
           <div className="w-24 h-1 rounded-full mx-auto grain-texture grain-texture-green" style={{ backgroundColor: '#75DEAF' }}></div>
@@ -31,7 +31,7 @@ const CTASection = () => {
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <p className="text-2xl md:text-3xl font-black text-center" style={{ color: '#0C5C38' }}>5 січня – стартуємо разом.</p>
+              <p className="text-2xl md:text-3xl font-black text-center uppercase" style={{ color: '#0C5C38' }}>5 січня – стартуємо разом.</p>
             </div>
           </div>
           <div className="p-8 rounded-2xl bg-white border-2 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all grain-texture grain-texture-white" style={{ borderColor: '#E5E5E5' }}>
@@ -43,13 +43,13 @@ const CTASection = () => {
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
               </div>
-              <p className="text-xl md:text-2xl text-center font-bold" style={{ color: '#2F2F2F' }}>7 днів – щоб налаштувати внутрішній компас на весь рік.</p>
+              <p className="text-xl md:text-2xl text-center font-normal uppercase" style={{ color: '#0C5C38' }}>7 днів – щоб налаштувати внутрішній компас на весь рік.</p>
             </div>
           </div>
         </div>
         <button 
           onClick={() => handlePayment()}
-          className="px-14 py-7 rounded-full text-xl font-bold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 relative overflow-hidden group border-2"
+          className="px-14 py-7 rounded-full text-xl font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 relative overflow-hidden group border-2"
           style={{ 
             borderColor: '#0C5C38',
             color: '#0C5C38',

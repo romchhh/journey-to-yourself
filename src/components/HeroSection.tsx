@@ -23,7 +23,7 @@ const HeroSection = () => {
           {/* Ліва частина - контент */}
           <div>
             {/* Бейдж */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-bold shadow-md grain-texture grain-texture-green" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-semibold shadow-md grain-texture grain-texture-green" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
               </svg>
@@ -31,12 +31,12 @@ const HeroSection = () => {
             </div>
 
             {/* Заголовок */}
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] tracking-tight text-black">
+            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] tracking-tight uppercase" style={{ color: '#0C5C38' }}>
               Подорож до себе
             </h1>
             
             {/* Підзаголовок */}
-            <p className="text-2xl md:text-3xl mb-10 leading-relaxed font-medium" style={{ color: '#2F2F2F' }}>
+            <p className="text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase" style={{ color: '#0C5C38' }}>
               7–денний практикум внутрішньої роботи, щоб почати новий рік інакше – з ясністю, опорою та розумінням, куди рухатись далі
             </p>
 
@@ -65,11 +65,11 @@ const HeroSection = () => {
                     <div className="p-2 rounded-lg" style={{ backgroundColor: '#F0FDF4' }}>
                       <img src={item.icon} alt="" className="w-5 h-5" />
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-wide" style={{ color: '#0C5C38' }}>
+                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: '#0C5C38' }}>
                       {item.label}
                     </span>
                   </div>
-                  <p className="text-base font-bold relative z-10" style={{ color: '#2F2F2F' }}>{item.value}</p>
+                  <p className="text-base font-semibold relative z-10" style={{ color: '#2F2F2F' }}>{item.value}</p>
                 </div>
               ))}
             </div>
@@ -77,7 +77,7 @@ const HeroSection = () => {
             {/* Кнопка */}
             <button 
               onClick={() => handlePayment()}
-              className="w-full md:w-auto px-14 py-7 rounded-full text-xl font-bold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group border-2"
+              className="w-full md:w-auto px-14 py-7 rounded-full text-xl font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group border-2"
               style={{ 
                 borderColor: '#0C5C38',
                 color: '#0C5C38',

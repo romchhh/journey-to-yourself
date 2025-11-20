@@ -39,7 +39,7 @@ const AboutAuthorSection = () => {
                   <circle cx="12" cy="7" r="4"/>
                 </svg>
                 <p className="text-lg md:text-xl leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
-                  Практикум створено психологом <strong style={{ color: '#0C5C38' }}>Анастасією Завадською</strong>
+                  Практикум створено психологом <strong className="font-black uppercase" style={{ color: '#0C5C38' }}>Анастасією Завадською</strong>
                 </p>
               </div>
             </div>
@@ -49,7 +49,7 @@ const AboutAuthorSection = () => {
                   <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
                   <circle cx="12" cy="12" r="5"/>
                 </svg>
-                <p className="text-lg md:text-xl leading-relaxed" style={{ color: '#2F2F2F' }}>
+                <p className="text-lg md:text-xl leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
                   Працюю з темами: внутрішня опора, виснаження, переоцінка цілей, повернення до себе.
                 </p>
               </div>

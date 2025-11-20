@@ -1,18 +1,42 @@
 "use client";
 
-import React from 'react';
+import React, { use } from 'react';
 import Link from 'next/link';
 import { handlePayment } from '@/utils/payment';
+import { useRouter } from 'next/navigation';
 
 interface VideoPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 const VideoPage = ({ params }: VideoPageProps) => {
-  const videoId = 'm0FYJ3s67hg'; // YouTube video ID
-  const videoNumber = params.id;
+  const resolvedParams = use(params);
+  const videoNumber = resolvedParams.id;
+  const router = useRouter();
+  
+  // Instagram Reels shortcodes
+  const reels: { [key: string]: string } = {
+    '1': 'DQogZgGjP1o',
+    '2': 'DQtj0KRjCsQ',
+    '3': 'DRPJOr8DJY0',
+  };
+  
+  const reelShortcode = reels[videoNumber];
+  const embedUrl = reelShortcode ? `https://www.instagram.com/reel/${reelShortcode}/embed/` : null;
+  
+  // Якщо відео недоступне, перенаправляємо на головну
+  React.useEffect(() => {
+    if (!embedUrl) {
+      router.push('/');
+    }
+  }, [embedUrl, router]);
+  
+  // Показуємо завантаження або нічого, поки перенаправляємо
+  if (!embedUrl) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -28,9 +52,11 @@ const VideoPage = ({ params }: VideoPageProps) => {
           </Link>
           <Link 
             href="/"
-            className="px-8 py-3 rounded-full text-white text-base font-bold transition-all hover:opacity-90 shadow-xl hover:shadow-2xl transform hover:scale-110"
+            className="px-8 py-3 rounded-full text-base font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-110 border-2"
             style={{ 
-              background: 'linear-gradient(135deg, #0C5C38 0%, #00A45A 50%, #75DEAF 100%)',
+              borderColor: '#0C5C38',
+              color: '#0C5C38',
+              backgroundColor: 'transparent',
             }}
           >
             На головну
@@ -63,8 +89,8 @@ const VideoPage = ({ params }: VideoPageProps) => {
                 </svg>
               </div>
               <div>
-                <div className="text-sm uppercase tracking-wide font-bold opacity-60" style={{ color: '#0C5C38' }}>Відео вправа</div>
-                <h1 className="text-4xl md:text-5xl font-black" style={{ color: '#0C5C38' }}>
+                <div className="text-sm uppercase tracking-wide font-semibold opacity-60" style={{ color: '#0C5C38' }}>Відео вправа</div>
+                <h1 className="text-4xl md:text-5xl font-black uppercase" style={{ color: '#0C5C38' }}>
                   {videoNumber}
                 </h1>
               </div>
@@ -72,16 +98,17 @@ const VideoPage = ({ params }: VideoPageProps) => {
             <div className="w-24 h-1 rounded-full" style={{ backgroundColor: '#75DEAF' }}></div>
           </div>
 
-          {/* YouTube Video Embed */}
-          <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white mb-8 relative group">
+          {/* Instagram Reel Embed */}
+          <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white mb-8 relative group flex justify-center">
             <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
-            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+            <div className="relative" style={{ width: '100%', maxWidth: '400px', height: '80vh' }}>
               <iframe
                 className="absolute top-0 left-0 w-full h-full"
-                src={`https://www.youtube.com/embed/${videoId}`}
+                src={embedUrl}
                 title={`Відео вправа ${videoNumber}`}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                scrolling="no"
               ></iframe>
             </div>
           </div>
@@ -95,11 +122,11 @@ const VideoPage = ({ params }: VideoPageProps) => {
                   <circle cx="12" cy="12" r="10"/>
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
-                <p className="text-lg leading-relaxed font-medium" style={{ color: '#2F2F2F' }}>
+                <p className="text-lg leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
                   Це м'який вхід у практикум: коротка вправа з тієї ж логіки, яку ми будемо застосовувати 7 днів.
                 </p>
               </div>
-              <p className="text-base leading-relaxed opacity-80 ml-9" style={{ color: '#2F2F2F' }}>
+              <p className="text-base leading-relaxed opacity-80 ml-9 font-semibold" style={{ color: '#2F2F2F' }}>
                 Кілька хвилин практичних завдань – і ти вже з'являється розуміння, більше тиші, присутності та контакту із собою.
               </p>
             </div>
@@ -109,12 +136,14 @@ const VideoPage = ({ params }: VideoPageProps) => {
           <div className="mt-8 text-center">
             <button
               onClick={() => handlePayment()}
-              className="inline-flex items-center gap-3 px-12 py-6 rounded-full text-white text-xl font-bold transition-all hover:opacity-90 shadow-2xl hover:shadow-3xl transform hover:scale-105 group"
+              className="inline-flex items-center gap-3 px-14 py-7 rounded-full text-xl font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group border-2"
               style={{ 
-                background: 'linear-gradient(135deg, #0C5C38 0%, #00A45A 50%, #75DEAF 100%)',
+                borderColor: '#0C5C38',
+                color: '#0C5C38',
+                backgroundColor: 'transparent',
               }}
             >
-              <span>Приєднатись до практикуму</span>
+              <span className="relative z-10">Приєднатись до практикуму</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="group-hover:translate-x-1 transition-transform">
                 <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

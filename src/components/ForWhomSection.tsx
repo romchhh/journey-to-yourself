@@ -11,7 +11,7 @@ const ForWhomSection = () => {
           </h2>
           <div className="w-24 h-1 rounded-full mx-auto" style={{ backgroundColor: '#75DEAF' }}></div>
         </div>
-        <p className="text-xl md:text-2xl mb-10 text-center leading-relaxed max-w-3xl mx-auto" style={{ color: '#2F2F2F' }}>
+        <p className="text-xl md:text-2xl mb-10 text-center leading-relaxed max-w-3xl mx-auto font-normal uppercase" style={{ color: '#0C5C38' }}>
           Для жінок, які хочуть почати рік без хаосу і виснаження – із ясністю та відчуттям себе.
         </p>
         <div className="p-10 rounded-3xl max-w-5xl mx-auto border-2 shadow-xl relative overflow-hidden grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#E5E5E5' }}>
@@ -19,7 +19,7 @@ const ForWhomSection = () => {
           <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(30%, 30%)' }}></div>
           <div className="relative z-10">
             <div className="text-center mb-10 p-6 bg-white rounded-2xl border-2 shadow-sm grain-texture grain-texture-white" style={{ borderColor: '#75DEAF' }}>
-              <p className="text-2xl md:text-3xl font-black" style={{ color: '#0C5C38' }}>
+              <p className="text-2xl md:text-3xl font-black uppercase" style={{ color: '#0C5C38' }}>
                 Це практикум для тебе, якщо:
               </p>
             </div>
