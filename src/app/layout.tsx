@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     description: "7-денний практикум внутрішньої роботи для жінок. Почати новий рік з ясністю, опорою та розумінням.",
     type: "website",
     locale: "uk_UA",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://landscaper.co.ua",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com",
     siteName: "Подорож до себе",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://landscaper.co.ua"}/0U0A7235.jpg`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com"}/0U0A7235.jpg`,
         width: 1200,
         height: 630,
         alt: "Подорож до себе - 7-денний практикум",

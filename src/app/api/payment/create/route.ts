@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
     // WayForPay credentials
     const merchantAccount = process.env.MERCHANT_ACCOUNT;
     const merchantSecretKey = process.env.MERCHANT_SECRET;
-    const merchantDomainName = process.env.NEXT_PUBLIC_SITE_URL || 'https://landscaper.co.ua';
+    const merchantDomainName = process.env.NEXT_PUBLIC_SITE_URL || 'https://journeytoyourself.anastasiiazavadska.com';
 
     if (!merchantAccount || !merchantSecretKey) {
       return NextResponse.json(
