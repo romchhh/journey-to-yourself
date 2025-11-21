@@ -52,7 +52,7 @@ export default function RootLayout({
     "inLanguage": "uk",
     "offers": {
       "@type": "Offer",
-      "price": "850",
+      "price": "1",
       "priceCurrency": "UAH",
       "availability": "https://schema.org/InStock"
     },

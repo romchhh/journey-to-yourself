@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
     // Product data
     const eventTitle = 'Journey to Self - 7-day practice'; // Латиниця для WayForPay
-    const amount = 850;
+    const amount = 1;
 
     // Генеруємо унікальний ID замовлення
     const orderReference = `JOURNEY_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
