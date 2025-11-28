@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Hide scrollbar for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Mont Font Face Declarations */
 @font-face {
   font-family: 'Mont';
@@ -8,7 +18,7 @@
        url('/fonts/font/Mont-Black.ttf') format('truetype');
   font-weight: 900;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
@@ -18,7 +28,7 @@
        url('/fonts/font/Mont-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 @font-face {
@@ -28,7 +38,7 @@
        url('/fonts/font/Mont-SemiBold.ttf') format('truetype');
   font-weight: 600;
   font-style: normal;
-  font-display: swap;
+  font-display: optional;
 }
 
 :root {

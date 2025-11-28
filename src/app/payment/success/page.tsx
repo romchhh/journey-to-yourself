@@ -1,11 +1,68 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
+import { getCurrentPrice } from '@/utils/price';
 
-const PaymentSuccessPage = () => {
+export const dynamic = 'force-dynamic';
+
+// Declare fbq for TypeScript
+declare global {
+  interface Window {
+    fbq: (
+      action: string,
+      event: string,
+      params?: {
+        content_name?: string;
+        content_category?: string;
+        value?: number;
+        currency?: string;
+      }
+    ) => void;
+  }
+}
+
+const PaymentSuccessContent = () => {
   const telegramBotUrl = 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=course_access';
+  const searchParams = useSearchParams();
+  const orderRef = searchParams.get('orderRef') || '';
+
+  useEffect(() => {
+    try {
+      // Track Purchase event for Meta Pixel
+      if (typeof window !== 'undefined' && window.fbq) {
+        const price = getCurrentPrice();
+        window.fbq('track', 'Purchase', {
+          content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+          content_category: 'Online Course',
+          value: price,
+          currency: 'UAH',
+        });
+      }
+
+      // Send conversion to Conversions API
+      if (orderRef) {
+        fetch('/api/facebook/conversion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            eventName: 'Purchase',
+            orderRef: orderRef,
+            value: getCurrentPrice(),
+            currency: 'UAH',
+          }),
+        }).catch((error) => {
+          console.error('Error sending conversion to Facebook:', error);
+        });
+      }
+    } catch (error) {
+      console.error('Error in payment success tracking:', error);
+    }
+  }, [orderRef]);
 
   return (
     <div className="min-h-screen bg-white">
@@ -87,6 +144,23 @@ const PaymentSuccessPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const PaymentSuccessPage = () => {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="pt-32 pb-24 px-6 flex items-center justify-center">
+          <div className="text-center">
+            <p style={{ color: '#2F2F2F' }}>Завантаження...</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 };
 

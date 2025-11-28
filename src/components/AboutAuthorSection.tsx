@@ -22,6 +22,8 @@ const AboutAuthorSection = () => {
                 width={600}
                 height={800}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="lazy"
+                quality={85}
               />
             </div>
             {/* Декоративний елемент */}
