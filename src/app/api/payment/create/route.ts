@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Product data
-    const eventTitle = 'Journey to Self - 7-day practice'; // Латиниця для WayForPay
+    const eventTitle = 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі'; // Опис для WayForPay
     const amount = getCurrentPrice(); // Динамічна ціна: 750 до 11 грудня, 850 після
 
     // Генеруємо унікальний ID замовлення
