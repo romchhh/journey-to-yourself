@@ -17,7 +17,7 @@ const AboutAuthorSection = () => {
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative group">
               <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
               <Image 
-                src="/сайт 2.JPG" 
+                src="/author-photo.jpg" 
                 alt="Анастасія Завадська" 
                 width={600}
                 height={800}
