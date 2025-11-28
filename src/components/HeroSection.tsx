@@ -3,8 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { handlePayment } from '@/utils/payment';
+import { getCurrentPrice, getPriceText } from '@/utils/price';
 
 const HeroSection = () => {
+  const currentPrice = getCurrentPrice();
+  const priceText = getPriceText();
+  
   const keyInfo = [
     { icon: '/Старт.svg', label: 'Старт', value: '5 січня' },
     { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
@@ -46,7 +50,7 @@ const HeroSection = () => {
               <div className="relative z-10">
                 <div className="flex items-baseline gap-4 mb-3">
                   <span className="text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500 грн</span>
-                  <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>850 грн</span>
+                  <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>{priceText}</span>
                 </div>
                 <p className="text-base font-semibold opacity-80" style={{ color: '#2F2F2F' }}>Період: 5–11 січня</p>
               </div>

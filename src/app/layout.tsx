@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { getCurrentPrice } from "@/utils/price";
 
 export const metadata: Metadata = {
   title: "Подорож до себе | 7-денний практикум внутрішньої роботи | Анастасія Завадська",
@@ -38,6 +39,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const currentPrice = getCurrentPrice();
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -52,7 +54,7 @@ export default function RootLayout({
     "inLanguage": "uk",
     "offers": {
       "@type": "Offer",
-      "price": "1",
+      "price": String(currentPrice),
       "priceCurrency": "UAH",
       "availability": "https://schema.org/InStock"
     },

@@ -38,7 +38,7 @@ const PauseSection = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {videos.map((video) => (
               video.available ? (
-                <a
+              <a
                   key={video.id}
                   href={`/video/${video.id}`}
                   className="group relative overflow-hidden rounded-3xl border-2 border-white/30 hover:border-white/60 transition-all hover:scale-105 transform shadow-2xl hover:shadow-3xl cursor-pointer"
@@ -60,7 +60,7 @@ const PauseSection = () => {
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                      </svg>
+                    </svg>
                     </div>
                     
                     {/* Video number badge */}
@@ -74,7 +74,7 @@ const PauseSection = () => {
                           <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center border-2 border-white/30">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-white">
                               <polygon points="5 3 19 12 5 21 5 3"/>
-                            </svg>
+                    </svg>
                           </div>
                         </div>
                       </div>
