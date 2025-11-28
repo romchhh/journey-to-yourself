@@ -46,10 +46,10 @@ const WhyImportantSection = () => {
           <div className="absolute bottom-0 right-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(20%, 20%)' }}></div>
           <div className="relative z-10">
             <p className="text-2xl md:text-3xl font-black mb-4 text-center uppercase" style={{ color: '#0C5C38' }}>
-              У цьому практикумі спочатку буде ясність → а потім план.
+              У цьому практикумі спочатку буде ясність → а потім план
             </p>
             <p className="text-xl md:text-2xl text-center font-normal uppercase" style={{ color: '#0C5C38' }}>
-              Не навпаки.
+              Не навпаки
             </p>
           </div>
         </div>
@@ -66,11 +66,10 @@ const WhyImportantSection = () => {
             <div className="grid md:grid-cols-2 gap-5">
               {whyImportantItems.map((item, index) => (
                 <div key={index} className="flex items-start gap-4 p-6 bg-white rounded-xl border-2 shadow-md hover:shadow-xl transition-all hover:scale-105 transform relative overflow-hidden group" style={{ borderColor: '#E5E5E5' }}>
-                  <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-5 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                  <div className="w-10 h-10 mt-1 flex-shrink-0 flex items-center justify-center rounded-full relative z-10 shadow-sm" style={{ backgroundColor: '#F0FDF4', border: '2px solid #75DEAF' }}>
+                  <div className="mt-1 flex-shrink-0 relative z-10">
                     <img src="/Пункт.svg" alt="" className="w-6 h-6" />
                   </div>
-                  <p className="text-lg font-semibold relative z-10 leading-relaxed" style={{ color: '#2F2F2F' }}>{item}</p>
+                  <p className="text-lg font-semibold relative z-10 leading-normal" style={{ color: '#2F2F2F' }}>{item}</p>
                 </div>
               ))}
             </div>

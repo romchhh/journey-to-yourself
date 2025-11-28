@@ -2,7 +2,7 @@ import React from 'react';
 
 const BonusesSection = () => {
   return (
-    <section className="py-24 px-6 grain-texture grain-texture-green" style={{ backgroundColor: '#75DEAF' }}>
+    <section className="py-24 px-6 grain-texture grain-texture-green" style={{ backgroundColor: '#00A45A' }}>
       <div className="max-w-6xl mx-auto text-white">
         <div className="mb-8 text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-3 uppercase tracking-tight">Що буде додатково</h2>

@@ -8,8 +8,8 @@ const HeroSection = () => {
   const keyInfo = [
     { icon: '/Старт.svg', label: 'Старт', value: '5 січня' },
     { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
-    { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' },
-    { icon: '/Графік.svg', label: 'Графік', value: '15–20 хв/день' }
+    { icon: '/Графік.svg', label: '', value: '14 практичних кроків до себе' },
+    { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' }
   ];
 
   return (
@@ -23,7 +23,7 @@ const HeroSection = () => {
           {/* Ліва частина - контент */}
           <div>
             {/* Бейдж */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-semibold shadow-md grain-texture grain-texture-green" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-semibold shadow-md" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
               </svg>
@@ -57,19 +57,19 @@ const HeroSection = () => {
               {keyInfo.map((item, index) => (
                 <div 
                   key={index}
-                  className="p-5 rounded-xl border-2 bg-white shadow-md hover:shadow-xl transition-all hover:scale-105 transform relative overflow-hidden group grain-texture grain-texture-white"
+                  className="p-5 rounded-xl border-2 bg-white shadow-md hover:shadow-xl transition-all hover:scale-105 transform relative overflow-hidden group grain-texture grain-texture-white flex flex-col items-center justify-center text-center"
                   style={{ borderColor: '#E5E5E5' }}
                 >
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                  <div className="flex items-center gap-3 mb-2 relative z-10">
-                    <div className="p-2 rounded-lg" style={{ backgroundColor: '#F0FDF4' }}>
-                      <img src={item.icon} alt="" className="w-5 h-5" />
-                    </div>
-                    <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: '#0C5C38' }}>
+                  <div className="mb-3 relative z-10">
+                    <img src={item.icon} alt="" className="w-12 h-12" />
+                  </div>
+                  {item.label && (
+                    <span className="text-sm font-semibold uppercase tracking-wide mb-1 relative z-10" style={{ color: '#0C5C38' }}>
                       {item.label}
                     </span>
-                  </div>
-                  <p className="text-base font-semibold relative z-10" style={{ color: '#2F2F2F' }}>{item.value}</p>
+                  )}
+                  <p className="text-lg font-semibold relative z-10" style={{ color: '#2F2F2F' }}>{item.value}</p>
                 </div>
               ))}
             </div>

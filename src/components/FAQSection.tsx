@@ -46,9 +46,22 @@ const FAQSection = () => {
               {openFaq === index && (
                 <div className="px-8 pb-8 pt-2 relative z-10">
                   <div className="pl-4 border-l-4" style={{ borderColor: '#75DEAF' }}>
-                    <p className="text-base md:text-lg leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
-                      {item.answer}
-                    </p>
+                    <div className="text-base md:text-lg leading-relaxed font-semibold" style={{ color: '#2F2F2F' }}>
+                      {item.answer.split('\n').map((paragraph, pIndex) => {
+                        if (paragraph.trim().startsWith('•')) {
+                          return (
+                            <p key={pIndex} className="mb-2 ml-4">
+                              {paragraph.trim()}
+                            </p>
+                          );
+                        }
+                        return (
+                          <p key={pIndex} className={pIndex > 0 ? "mt-4" : ""}>
+                            {paragraph.trim()}
+                          </p>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}

@@ -31,7 +31,7 @@ const CTASection = () => {
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <p className="text-2xl md:text-3xl font-black text-center uppercase" style={{ color: '#0C5C38' }}>5 січня – стартуємо разом.</p>
+              <p className="text-2xl md:text-3xl font-black text-center uppercase" style={{ color: '#0C5C38' }}>5 січня – стартуємо разом</p>
             </div>
           </div>
           <div className="p-8 rounded-2xl bg-white border-2 shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all grain-texture grain-texture-white" style={{ borderColor: '#E5E5E5' }}>
@@ -43,7 +43,7 @@ const CTASection = () => {
                   <polyline points="12 6 12 12 16 14"/>
                 </svg>
               </div>
-              <p className="text-xl md:text-2xl text-center font-normal uppercase" style={{ color: '#0C5C38' }}>7 днів – щоб налаштувати внутрішній компас на весь рік.</p>
+              <p className="text-xl md:text-2xl text-center font-normal uppercase" style={{ color: '#0C5C38' }}>7 днів – щоб налаштувати внутрішній компас на весь рік</p>
             </div>
           </div>
         </div>

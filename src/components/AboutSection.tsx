@@ -27,7 +27,7 @@ const AboutSection = () => {
               <div key={index} className="flex items-start gap-4 p-6 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 hover:bg-white/20 transition-all hover:scale-105 transform relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-5 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
                 <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(-20%, 20%)' }}></div>
-                <div className="w-10 h-10 mt-1 flex-shrink-0 flex items-center justify-center rounded-full bg-white/20 border-2 border-white/40 relative z-10 shadow-sm">
+                <div className="mt-1 flex-shrink-0 relative z-10">
                   <img src="/Пункт.svg" alt="" className="w-6 h-6 brightness-0 invert opacity-90" />
                 </div>
                 <p className="text-lg leading-relaxed font-semibold relative z-10 flex-1">{item}</p>

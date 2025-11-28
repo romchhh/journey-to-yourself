@@ -48,8 +48,8 @@ const JourneySection = () => {
             <div className="grid md:grid-cols-2 gap-5 mb-10">
               {dailyItems.map((item, index) => (
                 <div key={index} className="flex items-center gap-4 p-5 bg-white rounded-xl border-2 shadow-sm hover:shadow-lg transition-all hover:scale-105 transform group" style={{ borderColor: '#E5E5E5' }}>
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style={{ backgroundColor: '#F0FDF4' }}>
-                    <span className="text-xl font-black" style={{ color: '#75DEAF' }}>→</span>
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform" style={{ backgroundColor: '#F0FDF4' }}>
+                    <span className="text-3xl font-black leading-none" style={{ color: '#75DEAF' }}>→</span>
                   </div>
                   <p className="text-base font-semibold flex-1" style={{ color: '#2F2F2F' }}>{item}</p>
                 </div>
@@ -57,7 +57,7 @@ const JourneySection = () => {
             </div>
             <div className="text-center p-8 bg-white rounded-2xl border-2 shadow-md" style={{ borderColor: '#75DEAF', backgroundColor: '#F0FDF4' }}>
               <p className="text-xl font-black uppercase" style={{ color: '#0C5C38' }}>
-                15–20 хвилин на день, але ефект накопичується.
+                15–20 хвилин на день, але ефект накопичується
               </p>
             </div>
           </div>
