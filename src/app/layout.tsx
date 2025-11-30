@@ -40,8 +40,9 @@ export const metadata: Metadata = {
     apple: '/icon.svg',
   },
   other: {
-    "facebook-domain-verification": "mv6hfy64ws14gl6rq15mem8if2f2jx",
+    "facebook-domain-verification": "mv6hfy64ws14g|6rq15mem8if2f2jx",
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com"),
 };
 
 export default function RootLayout({
@@ -81,17 +82,18 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Facebook Domain Verification */}
+        {/* Facebook Domain Verification - Must be in <head> */}
         <Script
           id="facebook-domain-verification"
-          strategy="lazyOnload"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
+                if (document.querySelector('meta[name="facebook-domain-verification"]')) return;
                 var meta = document.createElement('meta');
                 meta.name = 'facebook-domain-verification';
-                meta.content = 'mv6hfy64ws14gl6rq15mem8if2f2jx';
-                document.getElementsByTagName('head')[0].appendChild(meta);
+                meta.content = 'mv6hfy64ws14g|6rq15mem8if2f2jx';
+                document.head.appendChild(meta);
               })();
             `,
           }}

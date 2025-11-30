@@ -1,6 +1,36 @@
+import { getCurrentPrice } from '@/utils/price';
+
+// Declare fbq for TypeScript
+declare global {
+  interface Window {
+    fbq: (
+      action: string,
+      event: string,
+      params?: {
+        content_name?: string;
+        content_category?: string;
+        value?: number;
+        currency?: string;
+      }
+    ) => void;
+  }
+}
+
 export const handlePayment = async () => {
   try {
     console.log('[CLIENT] Starting payment process...');
+    
+    // Track InitiateCheckout event for Facebook Pixel
+    if (typeof window !== 'undefined' && window.fbq) {
+      const price = getCurrentPrice();
+      window.fbq('track', 'InitiateCheckout', {
+        content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+        content_category: 'Online Course',
+        value: price,
+        currency: 'UAH',
+      });
+      console.log('[CLIENT] Facebook Pixel: InitiateCheckout event tracked');
+    }
     
     const response = await fetch('/api/payment/create', {
       method: 'POST',
