@@ -58,7 +58,7 @@ const FAQSection = () => {
                         return (
                           <p key={pIndex} className={pIndex > 0 ? "mt-4" : ""}>
                             {paragraph.trim()}
-                          </p>
+                    </p>
                         );
                       })}
                     </div>

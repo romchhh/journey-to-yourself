@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
       reason,
       merchantSignature,
     } = body;
-    
+
     console.log('[PAYMENT CALLBACK] Extracted data:', {
       merchantAccount,
       orderReference,
@@ -67,18 +67,18 @@ export async function POST(request: NextRequest) {
     console.log('[PAYMENT CALLBACK] Signature string:', signatureString);
 
     try {
-      const keyBuffer = Buffer.from(merchantSecretKey, 'utf8');
-      const dataBuffer = Buffer.from(signatureString, 'utf8');
+    const keyBuffer = Buffer.from(merchantSecretKey, 'utf8');
+    const dataBuffer = Buffer.from(signatureString, 'utf8');
       
       console.log('[PAYMENT CALLBACK] Buffer info:', {
         keyBufferLength: keyBuffer.length,
         dataBufferLength: dataBuffer.length,
       });
-      
-      const calculatedSignature = crypto
-        .createHmac('md5', keyBuffer)
-        .update(dataBuffer)
-        .digest('hex');
+    
+    const calculatedSignature = crypto
+      .createHmac('md5', keyBuffer)
+      .update(dataBuffer)
+      .digest('hex');
 
       console.log('[PAYMENT CALLBACK] Signature comparison:', {
         calculated: calculatedSignature,
@@ -86,12 +86,12 @@ export async function POST(request: NextRequest) {
         match: calculatedSignature === merchantSignature,
       });
 
-      if (calculatedSignature !== merchantSignature) {
+    if (calculatedSignature !== merchantSignature) {
         console.error('[PAYMENT CALLBACK] Invalid signature from WayForPay');
-        return NextResponse.json(
-          { error: 'Invalid signature' },
-          { status: 400 }
-        );
+      return NextResponse.json(
+        { error: 'Invalid signature' },
+        { status: 400 }
+      );
       }
     } catch (signatureError) {
       console.error('[PAYMENT CALLBACK] Signature verification error:', signatureError);

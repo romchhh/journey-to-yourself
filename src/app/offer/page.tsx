@@ -185,7 +185,7 @@ const OfferPage = () => {
               <p className="text-base leading-relaxed">
                 <strong>5.2.</strong> Замовник дає згоду на обробку персональних даних відповідно до Закону України «Про захист персональних даних».
               </p>
-            </div>
+                </div>
 
             <div className="p-8 rounded-2xl border-2 shadow-lg" style={{ backgroundColor: '#F8F9FA', borderColor: '#E5E5E5' }}>
               <h2 className="text-2xl font-black mb-4 uppercase" style={{ color: '#0C5C38' }}>6. Конфіденційність</h2>

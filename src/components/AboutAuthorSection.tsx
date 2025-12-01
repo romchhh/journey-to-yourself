@@ -37,17 +37,17 @@ const AboutAuthorSection = () => {
             <div className="p-5 bg-white rounded-xl border-2 shadow-sm relative z-10" style={{ borderColor: '#E5E5E5' }}>
               <p className="text-lg md:text-xl leading-normal font-semibold" style={{ color: '#2F2F2F' }}>
                 Практикум створено психологом <strong className="font-black uppercase" style={{ color: '#0C5C38' }}>Анастасією Завадською</strong>
-              </p>
+                </p>
             </div>
             <div className="p-5 bg-white rounded-xl border-2 shadow-sm relative z-10" style={{ borderColor: '#E5E5E5' }}>
               <p className="text-lg md:text-xl leading-normal font-semibold" style={{ color: '#2F2F2F' }}>
-                Працюю з темами: внутрішня опора, виснаження, переоцінка цілей, повернення до себе.
-              </p>
+                  Працюю з темами: внутрішня опора, виснаження, переоцінка цілей, повернення до себе.
+                </p>
             </div>
             <div className="p-5 bg-white rounded-xl border-2 shadow-md relative z-10" style={{ borderColor: '#75DEAF', backgroundColor: '#F0FDF4' }}>
               <p className="text-lg md:text-xl leading-normal font-semibold" style={{ color: '#0C5C38' }}>
-                Формат практик побудований так, щоб не вимагати сили й дисципліни – результат приходить через м'які, посильні кроки.
-              </p>
+                  Формат практик побудований так, щоб не вимагати сили й дисципліни – результат приходить через м'які, посильні кроки.
+                </p>
             </div>
           </div>
         </div>

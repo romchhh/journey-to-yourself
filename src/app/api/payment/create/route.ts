@@ -86,9 +86,9 @@ export async function POST(request: NextRequest) {
     // Створюємо HMAC MD5 підпис через Buffer
     let merchantSignature: string;
     try {
-      const keyBuffer = Buffer.from(merchantSecretKey, 'utf8');
-      const dataBuffer = Buffer.from(signatureString, 'utf8');
-      
+    const keyBuffer = Buffer.from(merchantSecretKey, 'utf8');
+    const dataBuffer = Buffer.from(signatureString, 'utf8');
+    
       console.log('[PAYMENT CREATE] Buffer info:', {
         keyBufferLength: keyBuffer.length,
         dataBufferLength: dataBuffer.length,
@@ -98,9 +98,9 @@ export async function POST(request: NextRequest) {
       
       // WayForPay використовує MD5 для SimpleSignature
       merchantSignature = crypto
-        .createHmac('md5', keyBuffer)
-        .update(dataBuffer)
-        .digest('hex');
+      .createHmac('md5', keyBuffer)
+      .update(dataBuffer)
+      .digest('hex');
       
       console.log('[PAYMENT CREATE] Generated signature (MD5):', merchantSignature);
       

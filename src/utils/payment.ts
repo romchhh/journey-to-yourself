@@ -94,13 +94,13 @@ export const handlePayment = async () => {
     console.log('[CLIENT] Submitting form to WayForPay...');
     console.log('[CLIENT] Form action:', form.action);
     console.log('[CLIENT] Form method:', form.method);
-    
+
     document.body.appendChild(form);
     
     // Додаємо невелику затримку для логування
     setTimeout(() => {
       console.log('[CLIENT] Form submitted');
-      form.submit();
+    form.submit();
     }, 100);
   } catch (error) {
     console.error('[CLIENT] Payment error:', error);
