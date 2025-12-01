@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
       productCount: productCounts,
       productPrice: productPrices.map(price => price.toFixed(2)), // З двома знаками після коми
       language: 'UA',
-      returnUrl: `${siteUrl}/payment/success?orderRef=${orderReference}`,
+      returnUrl: `${siteUrl}/api/payment/return?orderRef=${orderReference}`,
       serviceUrl: `${siteUrl}/api/payment/callback`,
     };
     
