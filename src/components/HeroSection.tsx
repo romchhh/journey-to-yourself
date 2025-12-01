@@ -12,7 +12,7 @@ const HeroSection = () => {
   const keyInfo = [
     { icon: '/Старт.svg', label: 'Старт', value: '5 січня' },
     { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
-    { icon: '/Графік.svg', label: '', value: '14 практичних кроків до себе' },
+    { icon: null, label: '', value: 'практичних кроків до себе', number: '14' },
     { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' }
   ];
 
@@ -66,7 +66,13 @@ const HeroSection = () => {
                 >
                   <div className="absolute top-0 right-0 w-16 h-16 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
                   <div className="mb-3 relative z-10">
-                    <img src={item.icon} alt="" className="w-12 h-12" />
+                    {('number' in item && item.number) ? (
+                      <div className="w-12 h-12 flex items-center justify-center text-2xl font-black" style={{ color: '#0C5C38' }}>
+                        {item.number}
+                      </div>
+                    ) : (
+                      <img src={item.icon as string} alt="" className="w-12 h-12" />
+                    )}
                   </div>
                   {item.label && (
                     <span className="text-sm font-semibold uppercase tracking-wide mb-1 relative z-10" style={{ color: '#0C5C38' }}>
