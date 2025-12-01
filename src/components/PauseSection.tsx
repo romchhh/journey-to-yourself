@@ -145,7 +145,7 @@ const PauseSection = () => {
                   key={video.id}
                   href={`/video/${video.id}`}
                   className="group relative overflow-hidden rounded-3xl border-2 border-white/30 hover:border-white/60 transition-all hover:scale-105 transform shadow-2xl hover:shadow-3xl cursor-pointer"
-                >
+              >
                   <div className="relative w-full aspect-[4/5] overflow-hidden">
                     <Image
                       src={video.thumbnail} 
