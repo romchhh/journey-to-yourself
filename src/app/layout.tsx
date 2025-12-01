@@ -101,7 +101,7 @@ export default function RootLayout({
         {/* Meta Pixel Code */}
         <Script
           id="facebook-pixel"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -114,6 +114,7 @@ export default function RootLayout({
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '1525933522023634');
               fbq('track', 'PageView');
+              console.log('[FB Pixel] Initialized and PageView tracked');
             `,
           }}
         />

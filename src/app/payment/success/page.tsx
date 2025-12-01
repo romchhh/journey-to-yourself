@@ -34,12 +34,16 @@ const PaymentSuccessContent = () => {
       // Track Purchase event for Meta Pixel
       if (typeof window !== 'undefined' && window.fbq) {
         const price = getCurrentPrice();
-        window.fbq('track', 'Purchase', {
+        const eventData = {
           content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
           content_category: 'Online Course',
           value: price,
           currency: 'UAH',
-        });
+        };
+        window.fbq('track', 'Purchase', eventData);
+        console.log('[FB Pixel] Purchase event tracked:', eventData);
+      } else {
+        console.warn('[FB Pixel] fbq is not available. Pixel may not be loaded yet.');
       }
 
       // Send conversion to Conversions API

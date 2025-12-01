@@ -23,13 +23,16 @@ export const handlePayment = async () => {
     // Track InitiateCheckout event for Facebook Pixel
     if (typeof window !== 'undefined' && window.fbq) {
       const price = getCurrentPrice();
-      window.fbq('track', 'InitiateCheckout', {
+      const eventData = {
         content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
         content_category: 'Online Course',
         value: price,
         currency: 'UAH',
-      });
-      console.log('[CLIENT] Facebook Pixel: InitiateCheckout event tracked');
+      };
+      window.fbq('track', 'InitiateCheckout', eventData);
+      console.log('[FB Pixel] InitiateCheckout event tracked:', eventData);
+    } else {
+      console.warn('[FB Pixel] fbq is not available. Pixel may not be loaded yet.');
     }
     
     const response = await fetch('/api/payment/create', {

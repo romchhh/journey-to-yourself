@@ -8,6 +8,8 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { eventName, orderRef, value, currency } = body;
 
+    console.log('[FB Conversions API] Received request:', { eventName, orderRef, value, currency });
+
     // Get client IP and user agent from request
     const clientIp = request.headers.get('x-forwarded-for') || 
                      request.headers.get('x-real-ip') || 
@@ -33,6 +35,8 @@ export async function POST(request: NextRequest) {
       },
     };
 
+    console.log('[FB Conversions API] Sending event:', JSON.stringify(eventData, null, 2));
+
     // Send to Facebook Conversions API
     const response = await fetch(
       `https://graph.facebook.com/v18.0/${PIXEL_ID}/events`,
@@ -49,9 +53,11 @@ export async function POST(request: NextRequest) {
     );
 
     const result = await response.json();
+    console.log('[FB Conversions API] Response status:', response.status);
+    console.log('[FB Conversions API] Response:', JSON.stringify(result, null, 2));
 
     if (!response.ok) {
-      console.error('Facebook Conversions API error:', result);
+      console.error('[FB Conversions API] Error:', result);
       return NextResponse.json(
         { error: 'Failed to send conversion', details: result },
         { status: response.status }
@@ -60,7 +66,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, result });
   } catch (error) {
-    console.error('Error processing Facebook conversion:', error);
+    console.error('[FB Conversions API] Exception:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
