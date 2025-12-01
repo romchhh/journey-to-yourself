@@ -13,7 +13,7 @@ export function getCurrentPrice(): number {
   // Якщо поточна дата до 12 грудня 2024 (тобто до 11 грудня включно) - 750 грн
   // Після 11 грудня 2024 (з 12 грудня) - 850 грн
   if (now < cutoffDate) {
-    return 1;
+    return 750;
   }
   
   return 850;
