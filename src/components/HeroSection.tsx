@@ -12,7 +12,7 @@ const HeroSection = () => {
   const keyInfo = [
     { icon: '/Старт.svg', label: 'Старт', value: '5 січня' },
     { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
-    { icon: '/Графік.svg', label: '', value: '15-20 хвилин на день' },
+    { icon: '/Графік.svg', label: 'Ритм', value: '15-20 хвилин на день' },
     { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' }
   ];
 
