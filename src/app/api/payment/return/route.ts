@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('[PAYMENT RETURN] Received POST to payment success return URL');
+    console.log('[PAYMENT RETURN] Received POST to payment return URL (api/payment/return)');
 
     const contentType = (request.headers.get('content-type') || '').toLowerCase();
     let data: Record<string, any> = {};
@@ -21,7 +21,6 @@ export async function POST(request: NextRequest) {
         data[key] = value;
       });
     } else {
-      // Fallback: try to parse plain text as JSON
       try {
         const text = await request.text();
         data = text ? JSON.parse(text) : {};
@@ -30,14 +29,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Common field names from payment providers
     const orderRef =
       data.orderRef || data.orderReference || data.order_id || data.order || '';
 
-    // Build redirect URL (use configured site URL if available)
-    const origin =
-      process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
     const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
     const redirectUrl = new URL(`/payment/success${query}`, origin).toString();
 
