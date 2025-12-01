@@ -147,7 +147,7 @@ const PauseSection = () => {
                   className="group relative overflow-hidden rounded-3xl border-2 border-white/30 hover:border-white/60 transition-all hover:scale-105 transform shadow-2xl hover:shadow-3xl cursor-pointer"
                 >
                   <div className="relative w-full aspect-[4/5] overflow-hidden">
-                    <Image 
+                    <Image
                       src={video.thumbnail} 
                       alt={`Відео ${video.id}`}
                       fill
@@ -156,7 +156,6 @@ const PauseSection = () => {
                       loading="lazy"
                       quality={85}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
                     
                     {/* Instagram icon */}
@@ -258,7 +257,7 @@ const PauseSection = () => {
                   {video.available ? (
                     <a
                       href={`/video/${video.id}`}
-                      className="group relative overflow-hidden rounded-3xl border-2 border-white/30 hover:border-white/60 transition-all transform shadow-2xl block"
+                      className="group relative overflow-hidden rounded-3xl block"
                       onClick={(e) => {
                         // Prevent navigation if user was dragging
                         if (isDragging) {
@@ -267,7 +266,7 @@ const PauseSection = () => {
                       }}
                     >
                       <div className="relative w-full aspect-[4/5] overflow-hidden">
-                        <Image 
+                        <Image
                           src={video.thumbnail} 
                           alt={`Відео ${video.id}`}
                           fill
@@ -276,7 +275,6 @@ const PauseSection = () => {
                           loading="lazy"
                           quality={85}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
                         <div className="absolute inset-0 bg-black/0 group-active:bg-black/10 transition-colors"></div>
                         
                         {/* Instagram icon */}

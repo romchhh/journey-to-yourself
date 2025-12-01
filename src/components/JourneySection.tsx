@@ -3,7 +3,7 @@ import { days, dailyItems } from '@/data/constants';
 
 const JourneySection = () => {
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-6 text-center">
           <h2 className="text-4xl md:text-5xl font-black mb-3 uppercase tracking-tight" style={{ color: '#0C5C38' }}>
@@ -56,7 +56,7 @@ const JourneySection = () => {
               ))}
             </div>
             <div className="text-center p-8 bg-white rounded-2xl border-2 shadow-md" style={{ borderColor: '#75DEAF', backgroundColor: '#F0FDF4' }}>
-              <p className="text-xl font-black uppercase" style={{ color: '#0C5C38' }}>
+              <p className="text-lg md:text-xl font-black uppercase max-w-xl mx-auto break-words" style={{ color: '#0C5C38' }}>
                 15–20 хвилин на день, але ефект накопичується
               </p>
             </div>
