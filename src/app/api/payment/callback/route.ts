@@ -5,9 +5,35 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
+    // КРИТИЧНО: Блокуємо multipart/form-data (може містити файли)
+    const contentType = request.headers.get('content-type') || '';
+    if (contentType.includes('multipart/form-data')) {
+      console.error('[PAYMENT CALLBACK] Blocked multipart request - potential file upload attempt');
+      return NextResponse.json(
+        { error: 'Invalid content type' },
+        { status: 400 }
+      );
+    }
+
+    // Базова перевірка User-Agent (WayForPay має специфічний User-Agent)
+    const userAgent = request.headers.get('user-agent') || '';
+    const origin = request.headers.get('origin') || request.headers.get('referer') || '';
+    
+    // Додаткова перевірка: можна додати whitelist IP адрес WayForPay
+    // const allowedIPs = process.env.WAYFORPAY_IP_WHITELIST?.split(',') || [];
+    
     console.log('[PAYMENT CALLBACK] Received callback request');
     
     const crypto = await import('crypto');
+    
+    // Валідація Content-Type перед парсингом
+    if (!contentType.includes('application/json')) {
+      return NextResponse.json(
+        { error: 'Invalid content type. Expected application/json' },
+        { status: 400 }
+      );
+    }
+    
     const body = await request.json();
     
     console.log('[PAYMENT CALLBACK] Request body:', body);

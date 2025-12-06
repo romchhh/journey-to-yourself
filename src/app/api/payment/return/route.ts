@@ -32,6 +32,14 @@ export async function POST(request: NextRequest) {
     const contentType = (request.headers.get('content-type') || '').toLowerCase();
     let data: Record<string, any> = {};
 
+    // КРИТИЧНО: Блокуємо multipart/form-data (може містити файли)
+    if (contentType.includes('multipart/form-data')) {
+      console.error('[PAYMENT RETURN] Blocked multipart request - potential file upload attempt');
+      // Все одно редіректимо, але не обробляємо файли
+      const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+      return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+    }
+
     // Логуємо деталі запиту
     console.log('[PAYMENT RETURN] Content-Type:', contentType);
     console.log('[PAYMENT RETURN] Headers:', {
@@ -43,12 +51,16 @@ export async function POST(request: NextRequest) {
     if (contentType.includes('application/json')) {
       data = await request.json();
       console.log('[PAYMENT RETURN] Parsed JSON data:', data);
-    } else if (
-      contentType.includes('application/x-www-form-urlencoded') ||
-      contentType.includes('multipart/form-data')
-    ) {
+    } else if (contentType.includes('application/x-www-form-urlencoded')) {
+      // Тільки urlencoded, НЕ multipart
       const form = await request.formData();
       form.forEach((value, key) => {
+        // Перевірка: чи це не файл
+        if (value instanceof File) {
+          console.error('[PAYMENT RETURN] Blocked file upload attempt in form data');
+          const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+          return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+        }
         data[key] = value;
       });
       console.log('[PAYMENT RETURN] Parsed form data:', data);
@@ -56,6 +68,12 @@ export async function POST(request: NextRequest) {
       try {
         const text = await request.text();
         console.log('[PAYMENT RETURN] Raw text body length:', text?.length || 0);
+        // Обмежуємо розмір тіла запиту (максимум 10KB)
+        if (text.length > 10240) {
+          console.error('[PAYMENT RETURN] Request body too large');
+          const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+          return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+        }
         data = text ? JSON.parse(text) : {};
       } catch (e) {
         console.log('[PAYMENT RETURN] Could not parse body as JSON');

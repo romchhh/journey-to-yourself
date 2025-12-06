@@ -1,11 +1,48 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const FACEBOOK_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN || 'EAA8wb4YQ3ZB4BQJQnGdZA6cFMeSZBZAT2UDK3JWM3fE9G6NVjN381uoptcwZBd3ZAMXKZAoJXZAs4sqqmhRZAocy46vyVUP9F2fVZBzAvYZA8OJuZBWhFOrNz6tdpKRiscfMd8L8lvLZBv08qIBkdUtQ4YuroVQrSgZC0QO1EdZA4DxOoFKfFb1bhS8vJbt1uVwFhddXAZDZD';
-const PIXEL_ID = '1525933522023634';
+const FACEBOOK_ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
+const PIXEL_ID = process.env.FACEBOOK_PIXEL_ID || '1525933522023634';
 
 export async function POST(request: NextRequest) {
   try {
+    // КРИТИЧНО: Блокуємо multipart/form-data (може містити файли)
+    const contentType = request.headers.get('content-type') || '';
+    if (contentType.includes('multipart/form-data')) {
+      console.error('[FB Conversions API] Blocked multipart request - potential file upload attempt');
+      return NextResponse.json(
+        { error: 'Invalid content type' },
+        { status: 400 }
+      );
+    }
+
+    // Валідація Content-Type
+    if (!contentType.includes('application/json')) {
+      return NextResponse.json(
+        { error: 'Invalid content type. Expected application/json' },
+        { status: 400 }
+      );
+    }
+
+    // Перевірка наявності токену
+    if (!FACEBOOK_ACCESS_TOKEN) {
+      console.error('[FB Conversions API] Facebook access token not configured');
+      return NextResponse.json(
+        { error: 'Facebook access token not configured' },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
+    
+    // Обмежуємо розмір тіла запиту (максимум 5KB)
+    const bodyString = JSON.stringify(body);
+    if (bodyString.length > 5120) {
+      console.error('[FB Conversions API] Request body too large');
+      return NextResponse.json(
+        { error: 'Request body too large' },
+        { status: 400 }
+      );
+    }
     const { eventName, orderRef, value, currency } = body;
 
     console.log('[FB Conversions API] Received request:', { eventName, orderRef, value, currency });

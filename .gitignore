@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Security: Block suspicious file types
+*.sh
+*.php
+*.py
+*.exe
+*.bat
+*.cmd
+*.ps1
+*.jar
+*.war
+
+# Block suspicious HTML files with random names (common malware pattern)
+# Add specific suspicious files here if found
