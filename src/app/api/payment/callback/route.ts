@@ -34,7 +34,26 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Обмежуємо розмір тіла запиту (максимум 50KB для callback)
+    const contentLength = request.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > 51200) {
+      console.error('[PAYMENT CALLBACK] Request body too large:', contentLength);
+      return NextResponse.json(
+        { error: 'Request body too large' },
+        { status: 413 }
+      );
+    }
+
     const body = await request.json();
+    
+    // Валідація структури body
+    if (typeof body !== 'object' || body === null || Array.isArray(body)) {
+      console.error('[PAYMENT CALLBACK] Invalid body structure');
+      return NextResponse.json(
+        { error: 'Invalid request body' },
+        { status: 400 }
+      );
+    }
     
     console.log('[PAYMENT CALLBACK] Request body:', body);
     

@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizeCss: true,
   },
-  // Захист від завантаження виконуваних файлів
+  // Захист від завантаження виконуваних файлів та майнерів
   async headers() {
     return [
       {
@@ -35,6 +35,26 @@ const nextConfig: NextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'off',
+          },
+          {
+            key: 'X-Download-Options',
+            value: 'noopen',
+          },
+          {
+            key: 'X-Permitted-Cross-Domain-Policies',
+            value: 'none',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), serial=(), bluetooth=()',
           },
         ],
       },

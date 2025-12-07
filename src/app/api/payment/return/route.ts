@@ -29,6 +29,14 @@ export async function POST(request: NextRequest) {
   try {
     console.log('[PAYMENT RETURN] Received POST to payment return URL');
 
+    // Обмежуємо розмір тіла запиту (максимум 10KB)
+    const contentLength = request.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > 10240) {
+      console.error('[PAYMENT RETURN] Request body too large:', contentLength);
+      const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+      return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+    }
+
     const contentType = (request.headers.get('content-type') || '').toLowerCase();
     let data: Record<string, any> = {};
 

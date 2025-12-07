@@ -1,0 +1,98 @@
+# Захист від майнерів та підозрілих файлів
+# Apache .htaccess конфігурація
+
+# Блокуємо виконання скриптів у public директорії
+<FilesMatch "\.(sh|php|py|exe|bat|cmd|ps1|jar|war)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Блокуємо доступ до файлів з випадковими назвами (20+ символів)
+<FilesMatch "^[a-z0-9]{20,}\.(html|js|php|sh|py|exe|bat|cmd|ps1|jar|war)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Блокуємо доступ до підозрілих HTML файлів
+<FilesMatch "\.html$">
+    # Дозволяємо тільки відомі файли
+    <If "%{REQUEST_URI} !~ /^(index|404|500)\.html$/">
+        # Додаткова перевірка - якщо файл має випадкову назву, блокуємо
+        <If "%{REQUEST_URI} =~ /[a-z0-9]{20,}\.html$/">
+            Order Allow,Deny
+            Deny from all
+        </If>
+    </If>
+</FilesMatch>
+
+# Забороняємо виконання PHP у public (якщо є)
+php_flag engine off
+
+# Security Headers
+<IfModule mod_headers.c>
+    # Content Security Policy - блокуємо підозрілі скрипти та майнери
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://connect.facebook.net https://www.facebook.com https://secure.wayforpay.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://connect.facebook.net https://graph.facebook.com https://secure.wayforpay.com; frame-src 'self' https://www.instagram.com https://secure.wayforpay.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; worker-src 'none'; child-src 'none'; manifest-src 'self'; media-src 'self';"
+    
+    # X-Content-Type-Options
+    Header set X-Content-Type-Options "nosniff"
+    
+    # X-Frame-Options
+    Header set X-Frame-Options "DENY"
+    
+    # X-XSS-Protection
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Referrer-Policy
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Permissions-Policy
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), serial=(), bluetooth=()"
+    
+    # Strict-Transport-Security
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    
+    # Додаткові security headers
+    Header set X-DNS-Prefetch-Control "off"
+    Header set X-Download-Options "noopen"
+    Header set X-Permitted-Cross-Domain-Policies "none"
+    
+    # Блокуємо завантаження файлів через POST
+    <FilesMatch "\.(sh|php|py|exe|bat|cmd|ps1|jar|war)$">
+        Header set X-Robots-Tag "noindex, nofollow"
+    </FilesMatch>
+</IfModule>
+
+# Забороняємо доступ до прихованих файлів
+<FilesMatch "^\.">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Забороняємо доступ до backup файлів
+<FilesMatch "\.(bak|backup|old|tmp|temp)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Захист від path traversal та інших атак
+RewriteEngine On
+
+# Блокуємо path traversal
+RewriteCond %{REQUEST_URI} (\.\./|\.\.) [NC,OR]
+RewriteCond %{REQUEST_URI} ^/(bin|etc|usr|var|tmp|root|home|proc|sys|dev)/ [NC,OR]
+RewriteCond %{QUERY_STRING} (\.\./|\.\.) [NC,OR]
+RewriteCond %{QUERY_STRING} (<script|javascript:|onerror=|onload=|eval\(|\.\.%2f|\.\.%5c) [NC]
+RewriteRule .* - [F,L]
+
+# Блокуємо занадто довгі URL
+RewriteCond %{REQUEST_URI} .{2049,} [NC]
+RewriteRule .* - [F,L]
+
+# Блокуємо підозрілі методи
+RewriteCond %{REQUEST_METHOD} ^(PUT|DELETE|PATCH|TRACE|CONNECT|OPTIONS) [NC]
+RewriteCond %{REQUEST_URI} !^/api/ [NC]
+RewriteRule .* - [F,L]
+
+# Обмежуємо розмір тіла запиту (якщо можливо)
+LimitRequestBody 10485760
+

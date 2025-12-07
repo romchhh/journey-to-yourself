@@ -7,11 +7,30 @@ export const dynamic = 'force-dynamic';
 export async function POST(request: NextRequest) {
   try {
     // Базова валідація Content-Type
-    const contentType = request.headers.get('content-type');
-    if (!contentType?.includes('application/json')) {
+    const contentType = request.headers.get('content-type') || '';
+    if (!contentType.includes('application/json')) {
       return NextResponse.json(
         { error: 'Invalid content type' },
         { status: 400 }
+      );
+    }
+
+    // Блокуємо multipart/form-data
+    if (contentType.includes('multipart/form-data')) {
+      console.error('[PAYMENT CREATE] Blocked multipart request - potential file upload attempt');
+      return NextResponse.json(
+        { error: 'File uploads not allowed' },
+        { status: 403 }
+      );
+    }
+
+    // Обмежуємо розмір тіла запиту (максимум 10KB)
+    const contentLength = request.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > 10240) {
+      console.error('[PAYMENT CREATE] Request body too large:', contentLength);
+      return NextResponse.json(
+        { error: 'Request body too large' },
+        { status: 413 }
       );
     }
 
