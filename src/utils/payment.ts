@@ -65,6 +65,8 @@ export const handlePayment = async () => {
     form.method = 'POST';
     form.action = 'https://secure.wayforpay.com/pay';
     form.target = '_self'; // Відкриваємо в тому ж вікні
+    form.enctype = 'application/x-www-form-urlencoded'; // Правильне кодування для WayForPay
+    form.acceptCharset = 'UTF-8'; // Кодування для кириличних символів
 
     Object.entries(result.data).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -73,6 +75,7 @@ export const handlePayment = async () => {
           const input = document.createElement('input');
           input.type = 'hidden';
           input.name = `${key}[${index}]`;
+          // Використовуємо encodeURIComponent для кириличних символів
           input.value = String(item);
           form.appendChild(input);
           console.log(`[CLIENT] Added form field: ${key}[${index}] = ${item}`);
@@ -98,13 +101,17 @@ export const handlePayment = async () => {
     console.log('[CLIENT] Form action:', form.action);
     console.log('[CLIENT] Form method:', form.method);
 
+    // Додаємо форму до body
     document.body.appendChild(form);
     
-    // Додаємо невелику затримку для логування
-    setTimeout(() => {
-      console.log('[CLIENT] Form submitted');
+    // Перевіряємо чи форма додана
+    if (!document.body.contains(form)) {
+      throw new Error('Не вдалося додати форму до DOM');
+    }
+
+    // Відправляємо форму одразу (без затримки для кращої надійності)
+    console.log('[CLIENT] Form submitted');
     form.submit();
-    }, 100);
   } catch (error) {
     console.error('[CLIENT] Payment error:', error);
     console.error('[CLIENT] Error details:', {

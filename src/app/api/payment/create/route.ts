@@ -42,9 +42,10 @@ export async function POST(request: NextRequest) {
     // WayForPay credentials
     const merchantAccount = process.env.MERCHANT_ACCOUNT;
     const merchantSecretKey = process.env.MERCHANT_SECRET;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://journeytoyourself.anastasiiazavadska.com';
+    // Прибираємо зайвий слеш в кінці URL
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://journeytoyourself.anastasiiazavadska.com').replace(/\/$/, '');
     // WayForPay потребує домен без протоколу для підпису, але з протоколом для URL
-    const merchantDomainName = siteUrl.replace(/^https?:\/\//, ''); // Видаляємо http:// або https://
+    const merchantDomainName = siteUrl.replace(/^https?:\/\//, '').replace(/\/$/, ''); // Видаляємо http:// або https:// та зайвий слеш
 
     console.log('[PAYMENT CREATE] Environment check:', {
       hasMerchantAccount: !!merchantAccount,
@@ -159,7 +160,7 @@ export async function POST(request: NextRequest) {
       productCount: productCounts,
       productPrice: productPrices.map(price => price.toFixed(2)), // З двома знаками після коми
       language: 'UA',
-      returnUrl: `${siteUrl}/api/payment/return?orderRef=${orderReference}`,
+      returnUrl: `${siteUrl}/api/payment/return?orderRef=${encodeURIComponent(orderReference)}`,
       serviceUrl: `${siteUrl}/api/payment/callback`,
     };
     

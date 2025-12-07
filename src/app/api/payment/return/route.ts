@@ -11,7 +11,8 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const orderRef = url.searchParams.get('orderRef') || '';
 
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+    // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
     const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
     const successUrl = new URL(`/payment/success${query}`, origin).toString();
 
@@ -20,7 +21,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(successUrl, 303);
   } catch (error) {
     console.error('[PAYMENT RETURN] GET Error:', error);
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+    // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
     return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
   }
 }
@@ -33,7 +35,8 @@ export async function POST(request: NextRequest) {
     const contentLength = request.headers.get('content-length');
     if (contentLength && parseInt(contentLength) > 10240) {
       console.error('[PAYMENT RETURN] Request body too large:', contentLength);
-      const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+      // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
       return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
     }
 
@@ -44,7 +47,8 @@ export async function POST(request: NextRequest) {
     if (contentType.includes('multipart/form-data')) {
       console.error('[PAYMENT RETURN] Blocked multipart request - potential file upload attempt');
       // Все одно редіректимо, але не обробляємо файли
-      const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+      // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
       return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
     }
 
@@ -66,7 +70,8 @@ export async function POST(request: NextRequest) {
         // Перевірка: чи це не файл
         if (value instanceof File) {
           console.error('[PAYMENT RETURN] Blocked file upload attempt in form data');
-          const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+          // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
           return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
         }
         data[key] = value;
@@ -79,7 +84,8 @@ export async function POST(request: NextRequest) {
         // Обмежуємо розмір тіла запиту (максимум 10KB)
         if (text.length > 10240) {
           console.error('[PAYMENT RETURN] Request body too large');
-          const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+          // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
           return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
         }
         data = text ? JSON.parse(text) : {};
@@ -100,7 +106,8 @@ export async function POST(request: NextRequest) {
 
     console.log('[PAYMENT RETURN] Extracted orderRef:', orderRef);
 
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+    // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
     const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
     const successUrl = new URL(`/payment/success${query}`, origin).toString();
 
@@ -115,7 +122,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Навіть при помилці редіректимо на success сторінку
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+    // Прибираємо зайвий слеш в кінці URL
+    const origin = (process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`).replace(/\/$/, '');
     return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
   }
 }

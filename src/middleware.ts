@@ -232,14 +232,14 @@ export function middleware(request: NextRequest) {
     "frame-src 'self' https://www.instagram.com https://secure.wayforpay.com",
     "object-src 'none'",
     "base-uri 'self'",
-    "form-action 'self'",
+    "form-action 'self' https://secure.wayforpay.com", // Дозволяємо відправку форм на WayForPay
     "frame-ancestors 'none'",
     "worker-src 'none'", // Блокуємо Web Workers (використовуються майнерами)
     "child-src 'none'", // Блокуємо iframe та інші дочірні контексти
     "manifest-src 'self'",
     "media-src 'self'",
     "prefetch-src 'self'",
-    "navigate-to 'self'",
+    "navigate-to 'self' https://secure.wayforpay.com", // Дозволяємо навігацію на WayForPay
   ].join('; ');
 
   response.headers.set('Content-Security-Policy', csp);
