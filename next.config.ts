@@ -12,7 +12,9 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   experimental: {
-    optimizeCss: true,
+    // @ts-expect-error - turbo property may not be in types but is valid
+    turbo: false,
+    optimizeCss: false,
   },
   // Захист від завантаження виконуваних файлів та майнерів
   async headers() {
