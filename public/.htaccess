@@ -8,22 +8,14 @@
 </FilesMatch>
 
 # Блокуємо доступ до файлів з випадковими назвами (20+ символів)
-<FilesMatch "^[a-z0-9]{20,}\.(html|js|php|sh|py|exe|bat|cmd|ps1|jar|war)$">
+# НО дозволяємо Facebook/Meta verification файли (.html)
+<FilesMatch "^[a-z0-9]{20,}\.(js|php|sh|py|exe|bat|cmd|ps1|jar|war)$">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
 
-# Блокуємо доступ до підозрілих HTML файлів
-<FilesMatch "\.html$">
-    # Дозволяємо тільки відомі файли
-    <If "%{REQUEST_URI} !~ /^(index|404|500)\.html$/">
-        # Додаткова перевірка - якщо файл має випадкову назву, блокуємо
-        <If "%{REQUEST_URI} =~ /[a-z0-9]{20,}\.html$/">
-            Order Allow,Deny
-            Deny from all
-        </If>
-    </If>
-</FilesMatch>
+# Дозволяємо HTML файли (включно з Facebook verification)
+# Блокуємо тільки явно шкідливі розширення, а не .html
 
 # Забороняємо виконання PHP у public (якщо є)
 php_flag engine off

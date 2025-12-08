@@ -167,12 +167,15 @@ export function middleware(request: NextRequest) {
   }
 
   // Блокуємо прямі запити до підозрілих файлів у public
+  // НО: дозволяємо Facebook/Meta verification файли
+  const isFacebookVerification = /^\/[a-z0-9]{20,}\.html$/i.test(pathname);
+  
   const suspiciousFilePatterns = [
-    /\/[a-z0-9]{20,}\.(html|sh|php|py|exe|bat|cmd|ps1|jar|war)$/i,
+    /\/[a-z0-9]{20,}\.(sh|php|py|exe|bat|cmd|ps1|jar|war)$/i, // Без .html - це може бути Facebook verification
     /\/[a-z0-9]{15,}\.js$/i, // Підозрілі JS файли з випадковими назвами
   ];
 
-  if (suspiciousFilePatterns.some(pattern => pattern.test(pathname))) {
+  if (!isFacebookVerification && suspiciousFilePatterns.some(pattern => pattern.test(pathname))) {
     console.error('[MIDDLEWARE] Blocked suspicious file request:', pathname);
     return NextResponse.json(
       { error: 'Not Found' },
