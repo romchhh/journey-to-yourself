@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
     // WayForPay credentials
     const merchantAccount = process.env.MERCHANT_ACCOUNT;
     const merchantSecretKey = process.env.MERCHANT_SECRET;
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://journeytoyourself.anastasiiazavadska.com';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://journey.anastasiiazavadska.com';
     // WayForPay потребує домен без протоколу для підпису, але з протоколом для URL
     const merchantDomainName = siteUrl.replace(/^https?:\/\//, ''); // Видаляємо http:// або https://
 

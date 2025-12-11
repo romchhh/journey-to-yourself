@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     description: "7-денний практикум внутрішньої роботи для жінок. Почати новий рік з ясністю, опорою та розумінням.",
     type: "website",
     locale: "uk_UA",
-    url: process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com",
+    url: process.env.NEXT_PUBLIC_SITE_URL || "https://journey.anastasiiazavadska.com",
     siteName: "Подорож до себе",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com"}/0U0A7235.jpg`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://journey.anastasiiazavadska.com"}/0U0A7235.jpg`,
         width: 1200,
         height: 630,
         alt: "Подорож до себе - 7-денний практикум",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   other: {
     "facebook-domain-verification": "mv6hfy64ws14g|6rq15mem8if2f2jx",
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://journeytoyourself.anastasiiazavadska.com"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://journey.anastasiiazavadska.com"),
 };
 
 export default function RootLayout({
@@ -112,7 +112,7 @@ export default function RootLayout({
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1525933522023634');
+              fbq('init', '1269074031904974');
               fbq('track', 'PageView');
               console.log('[FB Pixel] Initialized and PageView tracked');
             `,
@@ -123,7 +123,7 @@ export default function RootLayout({
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1525933522023634&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=1269074031904974&ev=PageView&noscript=1"
             alt=""
           />
         </noscript>

@@ -100,7 +100,7 @@ const OfferPage = () => {
                 <strong>1.7.</strong> Терміни, що використовуються у цьому Договорі, вживаються у таких значеннях:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
-                <li><strong>1.7.1.</strong> Публічна оферта - пропозиція Виконавця про укладення Договору, розміщена на веб-сайті https://journeytoyourself.anastasiiazavadska.com/ Виконавця та викладена Виконавцем в умовах цього Договору, що адресована невизначеному колу фізичних осіб;</li>
+                <li><strong>1.7.1.</strong> Публічна оферта - пропозиція Виконавця про укладення Договору, розміщена на веб-сайті https://journey.anastasiiazavadska.com/ Виконавця та викладена Виконавцем в умовах цього Договору, що адресована невизначеному колу фізичних осіб;</li>
                 <li><strong>1.7.2.</strong> Акцепт - повне, безумовне та беззастережне прийняття Замовником умов Договору шляхом повної оплати послуг Виконавця.</li>
                 <li><strong>1.7.3.</strong> Замовник - фізична особа, яка отримує від Виконавця послуги на умовах, передбачених Договором.</li>
               </ul>
@@ -271,7 +271,7 @@ const OfferPage = () => {
                 <p>Адреса: онлайн</p>
                 <p>Телефон: +380506230688</p>
                 <p>Email або Instagram/Telegram: <a href="https://www.instagram.com/anastasiia__zavadska" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://www.instagram.com/anastasiia__zavadska</a></p>
-                <p>Сайт: <a href="https://journeytoyourself.anastasiiazavadska.com/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://journeytoyourself.anastasiiazavadska.com/</a></p>
+                <p>Сайт: <a href="https://journey.anastasiiazavadska.com/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://journey.anastasiiazavadska.com/</a></p>
               </div>
             </div>
 

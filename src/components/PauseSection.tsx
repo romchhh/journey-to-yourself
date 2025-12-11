@@ -13,9 +13,9 @@ const PauseSection = () => {
     { id: 1, shortcode: 'DQogZgGjP1o', available: true, thumbnail: '/001.png' },
     { id: 2, shortcode: 'DQtj0KRjCsQ', available: true, thumbnail: '/002.png' },
     { id: 3, shortcode: 'DRPJOr8DJY0', available: true, thumbnail: '/003.png' },
-    { id: 4, shortcode: '', available: false, thumbnail: '/004.png' },
-    { id: 5, shortcode: '', available: false, thumbnail: '/005.png' },
-    { id: 6, shortcode: '', available: false, thumbnail: '/006.png' },
+    { id: 4, shortcode: 'DRmIq00DEFV', available: true, thumbnail: '/004.png' },
+    { id: 5, shortcode: 'DRzKVZnjEDY', available: true, thumbnail: '/005.png' },
+    { id: 6, shortcode: 'DSAVe6fjCGy', available: true, thumbnail: '/006.png' },
   ];
 
   const totalSlides = videos.length;

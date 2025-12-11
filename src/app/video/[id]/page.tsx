@@ -21,6 +21,9 @@ const VideoPage = ({ params }: VideoPageProps) => {
     '1': 'DQogZgGjP1o',
     '2': 'DQtj0KRjCsQ',
     '3': 'DRPJOr8DJY0',
+    '4': 'DRmIq00DEFV',
+    '5': 'DRzKVZnjEDY',
+    '6': 'DSAVe6fjCGy',
   };
   
   const reelShortcode = reels[videoNumber];
