@@ -7,21 +7,45 @@ export async function GET(request: NextRequest) {
   try {
     console.log('[PAYMENT RETURN] Received GET to payment return URL');
 
-    // Отримуємо orderRef з query параметрів (якщо він там є)
     const url = new URL(request.url);
     const orderRef = url.searchParams.get('orderRef') || '';
+    const transactionStatus = url.searchParams.get('transactionStatus') || 
+                             url.searchParams.get('status') || 
+                             '';
+    const reasonCode = url.searchParams.get('reasonCode') || '';
+
+    console.log('[PAYMENT RETURN] GET params:', {
+      orderRef,
+      transactionStatus,
+      reasonCode,
+      allParams: Object.fromEntries(url.searchParams.entries()),
+    });
 
     const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-    const successUrl = new URL(`/payment/success${query}`, origin).toString();
-
-    console.log('[PAYMENT RETURN] GET redirect to:', successUrl);
-
-    return NextResponse.redirect(successUrl, 303);
+    
+    // Перевіряємо статус транзакції
+    // WayForPay: transactionStatus === 'Approved' або reasonCode === '1100' означає успішну оплату
+    const isSuccess = transactionStatus === 'Approved' || 
+                     transactionStatus === 'approved' || 
+                     reasonCode === '1100';
+    
+    if (isSuccess) {
+      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
+      const successUrl = new URL(`/payment/success${query}`, origin).toString();
+      console.log('[PAYMENT RETURN] GET redirect to success:', successUrl);
+      return NextResponse.redirect(successUrl, 303);
+    } else {
+      // Неуспішна оплата або статус не вказано
+      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
+      const failureUrl = new URL(`/payment/failure${query}`, origin).toString();
+      console.log('[PAYMENT RETURN] GET redirect to failure:', failureUrl);
+      return NextResponse.redirect(failureUrl, 303);
+    }
   } catch (error) {
     console.error('[PAYMENT RETURN] GET Error:', error);
     const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+    // При помилці редіректимо на failure сторінку
+    return NextResponse.redirect(new URL('/payment/failure', origin).toString(), 303);
   }
 }
 
@@ -48,7 +72,7 @@ export async function POST(request: NextRequest) {
       contentType.includes('multipart/form-data')
     ) {
       const form = await request.formData();
-      form.forEach((value, key) => {
+      form.forEach((value: FormDataEntryValue, key: string) => {
         data[key] = value;
       });
       console.log('[PAYMENT RETURN] Parsed form data:', data);
@@ -72,15 +96,48 @@ export async function POST(request: NextRequest) {
       data.ORDER_ID ||
       '';
 
-    console.log('[PAYMENT RETURN] Extracted orderRef:', orderRef);
+    // Шукаємо статус транзакції
+    const transactionStatus =
+      data.transactionStatus ||
+      data.status ||
+      data.transaction_status ||
+      data.STATUS ||
+      '';
+
+    // Шукаємо reasonCode (1100 означає успішну оплату)
+    const reasonCode =
+      data.reasonCode ||
+      data.reason_code ||
+      data.REASON_CODE ||
+      String(data.reasonCode || '');
+
+    console.log('[PAYMENT RETURN] Extracted data:', {
+      orderRef,
+      transactionStatus,
+      reasonCode,
+      allData: data,
+    });
 
     const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
     const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-    const successUrl = new URL(`/payment/success${query}`, origin).toString();
 
-    console.log('[PAYMENT RETURN] POST redirect to:', successUrl);
-
-    return NextResponse.redirect(successUrl, 303);
+    // Перевіряємо статус транзакції
+    // WayForPay: transactionStatus === 'Approved' або reasonCode === '1100' означає успішну оплату
+    const isSuccess = transactionStatus === 'Approved' || 
+                     transactionStatus === 'approved' || 
+                     reasonCode === '1100' ||
+                     reasonCode === 1100;
+    
+    if (isSuccess) {
+      const successUrl = new URL(`/payment/success${query}`, origin).toString();
+      console.log('[PAYMENT RETURN] POST redirect to success:', successUrl);
+      return NextResponse.redirect(successUrl, 303);
+    } else {
+      // Неуспішна оплата або статус не вказано
+      const failureUrl = new URL(`/payment/failure${query}`, origin).toString();
+      console.log('[PAYMENT RETURN] POST redirect to failure:', failureUrl);
+      return NextResponse.redirect(failureUrl, 303);
+    }
   } catch (error) {
     console.error('[PAYMENT RETURN] POST Error:', error);
     console.error('[PAYMENT RETURN] Error details:', {
@@ -88,8 +145,8 @@ export async function POST(request: NextRequest) {
       stack: error instanceof Error ? error.stack : undefined,
     });
 
-    // Навіть при помилці редіректимо на success сторінку
+    // При помилці редіректимо на failure сторінку
     const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    return NextResponse.redirect(new URL('/payment/success', origin).toString(), 303);
+    return NextResponse.redirect(new URL('/payment/failure', origin).toString(), 303);
   }
 }
