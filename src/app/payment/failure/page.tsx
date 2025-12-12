@@ -51,7 +51,19 @@ const PaymentFailureContent = () => {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-2xl font-bold" style={{ color: '#DC2626' }}>•</span>
-                <span className="font-semibold">Напишіть нам у підтримку, якщо потрібна допомога</span>
+                <span className="font-semibold">
+                  Напишіть нам у підтримку в Telegram:{' '}
+                  <a
+                    href="https://t.me/anastasia_zavadska"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline hover:opacity-80 transition-opacity"
+                    style={{ color: '#0C5C38' }}
+                  >
+                    @anastasia_zavadska
+                  </a>
+                  , якщо потрібна допомога
+                </span>
               </li>
             </ul>
 
