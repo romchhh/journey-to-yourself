@@ -1,4 +1,5 @@
 import { getCurrentPrice } from '@/utils/price';
+import { generateEventId, getFbp, getFbc } from '@/utils/facebookTracking';
 
 // Declare fbq for TypeScript
 declare global {
@@ -11,6 +12,7 @@ declare global {
         content_category?: string;
         value?: number;
         currency?: string;
+        eventID?: string;
       }
     ) => void;
   }
@@ -20,19 +22,55 @@ export const handlePayment = async () => {
   try {
     console.log('[CLIENT] Starting payment process...');
     
-    // Track InitiateCheckout event for Facebook Pixel
-    if (typeof window !== 'undefined' && window.fbq) {
+    // Track InitiateCheckout event for Facebook Pixel and CAPI
+    if (typeof window !== 'undefined') {
       const price = getCurrentPrice();
-      const eventData = {
-        content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
-        content_category: 'Online Course',
-        value: price,
-        currency: 'UAH',
-      };
-      window.fbq('track', 'InitiateCheckout', eventData);
-      console.log('[FB Pixel] InitiateCheckout event tracked:', eventData);
-    } else {
-      console.warn('[FB Pixel] fbq is not available. Pixel may not be loaded yet.');
+      const eventId = generateEventId();
+      const fbp = getFbp();
+      const fbc = getFbc();
+      const eventSourceUrl = window.location.href;
+
+      // Track in Pixel with eventID
+      if (window.fbq) {
+        const eventData = {
+          content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+          content_category: 'Online Course',
+          value: price,
+          currency: 'UAH',
+          eventID: eventId, // For deduplication
+        };
+        window.fbq('track', 'InitiateCheckout', eventData);
+        console.log('[FB Pixel] InitiateCheckout event tracked:', eventData);
+      } else {
+        console.warn('[FB Pixel] fbq is not available. Pixel may not be loaded yet.');
+      }
+
+      // Send to Conversions API
+      fetch('/api/facebook/conversion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          eventName: 'InitiateCheckout',
+          eventId: eventId,
+          value: price,
+          currency: 'UAH',
+          fbp: fbp,
+          fbc: fbc,
+          eventSourceUrl: eventSourceUrl,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            console.log('[FB CAPI] InitiateCheckout event sent successfully');
+          } else {
+            console.error('[FB CAPI] Failed to send InitiateCheckout event:', response.status);
+          }
+        })
+        .catch((error) => {
+          console.error('[FB CAPI] Error sending InitiateCheckout:', error);
+        });
     }
     
     const response = await fetch('/api/payment/create', {

@@ -5,6 +5,13 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
 import { getCurrentPrice } from '@/utils/price';
+import { 
+  generateEventId, 
+  getFbp, 
+  getFbc, 
+  isPurchaseAlreadySent, 
+  markPurchaseAsSent 
+} from '@/utils/facebookTracking';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,6 +26,7 @@ declare global {
         content_category?: string;
         value?: number;
         currency?: string;
+        eventID?: string;
       }
     ) => void;
   }
@@ -30,15 +38,40 @@ const PaymentSuccessContent = () => {
   const orderRef = searchParams.get('orderRef') || '';
 
   useEffect(() => {
+    // Skip if no orderRef
+    if (!orderRef) {
+      console.warn('[FB Tracking] No orderRef provided, skipping Purchase tracking');
+      return;
+    }
+
+    // Check if Purchase was already sent for this orderRef
+    if (isPurchaseAlreadySent(orderRef)) {
+      console.log('[FB Tracking] Purchase already sent for orderRef:', orderRef);
+      return;
+    }
+
     try {
-      // Track Purchase event for Meta Pixel
+      const price = getCurrentPrice();
+      const eventId = generateEventId();
+      const fbp = getFbp();
+      const fbc = getFbc();
+
+      console.log('[FB Tracking] Tracking Purchase:', {
+        orderRef,
+        eventId,
+        fbp,
+        fbc,
+        value: price,
+      });
+
+      // Track Purchase event for Meta Pixel with eventID
       if (typeof window !== 'undefined' && window.fbq) {
-        const price = getCurrentPrice();
         const eventData = {
           content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
           content_category: 'Online Course',
           value: price,
           currency: 'UAH',
+          eventID: eventId, // For deduplication
         };
         window.fbq('track', 'Purchase', eventData);
         console.log('[FB Pixel] Purchase event tracked:', eventData);
@@ -46,25 +79,36 @@ const PaymentSuccessContent = () => {
         console.warn('[FB Pixel] fbq is not available. Pixel may not be loaded yet.');
       }
 
-      // Send conversion to Conversions API
-      if (orderRef) {
-        fetch('/api/facebook/conversion', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            eventName: 'Purchase',
-            orderRef: orderRef,
-            value: getCurrentPrice(),
-            currency: 'UAH',
-          }),
-        }).catch((error) => {
-          console.error('Error sending conversion to Facebook:', error);
+      // Send conversion to Conversions API with event_id, fbp, fbc
+      fetch('/api/facebook/conversion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          eventName: 'Purchase',
+          eventId: eventId,
+          orderRef: orderRef,
+          value: price,
+          currency: 'UAH',
+          fbp: fbp,
+          fbc: fbc,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Mark as sent only if API call was successful
+            markPurchaseAsSent(orderRef);
+            console.log('[FB CAPI] Purchase event sent successfully');
+          } else {
+            console.error('[FB CAPI] Failed to send Purchase event:', response.status);
+          }
+        })
+        .catch((error) => {
+          console.error('[FB CAPI] Error sending conversion to Facebook:', error);
         });
-      }
     } catch (error) {
-      console.error('Error in payment success tracking:', error);
+      console.error('[FB Tracking] Error in payment success tracking:', error);
     }
   }, [orderRef]);
 

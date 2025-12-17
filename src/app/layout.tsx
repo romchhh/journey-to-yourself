@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { getCurrentPrice } from "@/utils/price";
 import HeadOptimization from "@/components/HeadOptimization";
+import FacebookPageView from "@/components/FacebookPageView";
 
 export const metadata: Metadata = {
   title: "Подорож до себе | 7-денний практикум внутрішньої роботи | Анастасія Завадська",
@@ -113,8 +114,7 @@ export default function RootLayout({
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
               fbq('init', '1269074031904974');
-              fbq('track', 'PageView');
-              console.log('[FB Pixel] Initialized and PageView tracked');
+              console.log('[FB Pixel] Initialized');
             `,
           }}
         />
@@ -128,6 +128,7 @@ export default function RootLayout({
           />
         </noscript>
         {/* End Meta Pixel Code */}
+        <FacebookPageView />
         {children}
       </body>
     </html>

@@ -7,34 +7,79 @@ const PIXEL_ID = '1269074031904974';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { eventName, orderRef, value, currency } = body;
+    const { 
+      eventName, 
+      orderRef, 
+      value, 
+      currency, 
+      eventId, 
+      fbp, 
+      fbc,
+      eventSourceUrl 
+    } = body;
 
-    console.log('[FB Conversions API] Received request:', { eventName, orderRef, value, currency });
+    console.log('[FB Conversions API] Received request:', { 
+      eventName, 
+      orderRef, 
+      value, 
+      currency, 
+      eventId, 
+      fbp, 
+      fbc 
+    });
 
     // Get client IP and user agent from request
     const clientIp = request.headers.get('x-forwarded-for') || 
                      request.headers.get('x-real-ip') || 
                      '0.0.0.0';
     const userAgent = request.headers.get('user-agent') || '';
+    const referer = eventSourceUrl || request.headers.get('referer') || '';
+
+    // Prepare user_data with fbp and fbc for deduplication
+    const userData: any = {
+      client_ip_address: clientIp.split(',')[0].trim(),
+      client_user_agent: userAgent,
+    };
+
+    // Add fbp (Facebook Browser ID) if available
+    if (fbp) {
+      userData.fbp = fbp;
+    }
+
+    // Add fbc (Facebook Click ID) if available
+    if (fbc) {
+      userData.fbc = fbc;
+    }
 
     // Prepare event data for Conversions API
-    const eventData = {
+    const eventData: any = {
       event_name: eventName || 'Purchase',
       event_time: Math.floor(Date.now() / 1000),
       action_source: 'website',
-      event_source_url: request.headers.get('referer') || '',
-      user_data: {
-        client_ip_address: clientIp.split(',')[0].trim(),
-        client_user_agent: userAgent,
-      },
-      custom_data: {
+      event_source_url: referer,
+      user_data: userData,
+    };
+
+    // Add event_id for deduplication (required for Purchase events)
+    if (eventId) {
+      eventData.event_id = eventId;
+    }
+
+    // Add custom_data based on event type
+    if (eventName === 'Purchase' || eventName === 'InitiateCheckout') {
+      eventData.custom_data = {
         content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
         content_category: 'Online Course',
         value: value || 0,
         currency: currency || 'UAH',
-        order_id: orderRef || '',
-      },
-    };
+      };
+      
+      // Add order_id for Purchase events
+      if (eventName === 'Purchase' && orderRef) {
+        eventData.custom_data.order_id = orderRef;
+      }
+    }
+    // PageView events don't need custom_data
 
     console.log('[FB Conversions API] Sending event:', JSON.stringify(eventData, null, 2));
 
