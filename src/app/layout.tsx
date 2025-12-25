@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Unbounded } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { getCurrentPrice } from "@/utils/price";
 import HeadOptimization from "@/components/HeadOptimization";
 import FacebookPageView from "@/components/FacebookPageView";
 
-const unbounded = Unbounded({
+const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
-  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-unbounded",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -84,8 +84,8 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className={`${unbounded.variable} antialiased`}
-        style={{ fontFamily: 'var(--font-unbounded), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
+        className={`${montserrat.variable} antialiased`}
+        style={{ fontFamily: 'var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
       >
         <HeadOptimization />
         <script
