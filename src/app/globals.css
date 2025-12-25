@@ -10,36 +10,7 @@
   display: none;
 }
 
-/* Mont Font Face Declarations */
-@font-face {
-  font-family: 'Mont';
-  src: url('/fonts/font/Mont-Black.woff2') format('woff2'),
-       url('/fonts/font/Mont-Black.woff') format('woff'),
-       url('/fonts/font/Mont-Black.ttf') format('truetype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: optional;
-}
-
-@font-face {
-  font-family: 'Mont';
-  src: url('/fonts/font/Mont-Regular.woff2') format('woff2'),
-       url('/fonts/font/Mont-Regular.woff') format('woff'),
-       url('/fonts/font/Mont-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: optional;
-}
-
-@font-face {
-  font-family: 'Mont';
-  src: url('/fonts/font/Mont-SemiBold.woff2') format('woff2'),
-       url('/fonts/font/Mont-SemiBold.woff') format('woff'),
-       url('/fonts/font/Mont-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: optional;
-}
+/* Unbounded font will be loaded via next/font/google in layout.tsx */
 
 :root {
   --background: #ffffff;
@@ -49,7 +20,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Mont', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-sans: var(--font-unbounded), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,8 +33,8 @@
 body {
   background: #FFFFFF;
   color: #2F2F2F;
-  font-family: 'Mont', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 600;
+  font-family: var(--font-unbounded), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
 }
 
 @keyframes fadeInUp {

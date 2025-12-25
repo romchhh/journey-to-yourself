@@ -86,7 +86,7 @@ const Footer = () => {
           <p className="text-sm opacity-70 mb-2">
             Developed by{' '}
             <a 
-              href="https://telebots.site/" 
+              href="https://new.telebots.site/?utm_source=journey_website&utm_medium=referral&utm_campaign=footer_link" 
               target="_blank" 
               rel="noopener noreferrer"
               className="font-semibold hover:opacity-100 transition-opacity underline"

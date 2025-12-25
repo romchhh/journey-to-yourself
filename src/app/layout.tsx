@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Unbounded } from "next/font/google";
 import "./globals.css";
 import { getCurrentPrice } from "@/utils/price";
 import HeadOptimization from "@/components/HeadOptimization";
 import FacebookPageView from "@/components/FacebookPageView";
+
+const unbounded = Unbounded({
+  subsets: ["latin", "cyrillic"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-unbounded",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Подорож до себе | 7-денний практикум внутрішньої роботи | Анастасія Завадська",
@@ -76,7 +84,8 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className="antialiased"
+        className={`${unbounded.variable} antialiased`}
+        style={{ fontFamily: 'var(--font-unbounded), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
       >
         <HeadOptimization />
         <script
