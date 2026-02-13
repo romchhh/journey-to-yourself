@@ -41,7 +41,7 @@ const HeroSection = () => {
             
             {/* Підзаголовок */}
             <p className="text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase" style={{ color: '#0C5C38' }}>
-              7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – навіть якщо зараз відчувається виснаження і сил на зміни немає
+              7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – <span className="font-black">навіть якщо зараз відчувається виснаження і сил на зміни немає</span>
             </p>
 
             {/* Ціна */}
@@ -52,7 +52,10 @@ const HeroSection = () => {
                   <span className="text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500</span>
                   <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>595 грн</span>
                 </div>
-                <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>самостійний формат</p>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: самостійний</p>
+                  <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
+                </div>
               </div>
             </div>
 
