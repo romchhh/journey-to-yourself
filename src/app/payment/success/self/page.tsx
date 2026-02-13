@@ -32,15 +32,11 @@ declare global {
   }
 }
 
-const PaymentSuccessContent = () => {
+const PaymentSuccessSelfContent = () => {
+  // Посилання на бот для самостійного тарифу
+  const telegramBotUrl = 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=self_access';
   const searchParams = useSearchParams();
   const orderRef = searchParams.get('orderRef') || '';
-  const tariffType = searchParams.get('tariffType') || 'self';
-  
-  // Визначаємо посилання на бот залежно від типу тарифу
-  const telegramBotUrl = tariffType === 'psychologist' 
-    ? 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=psychologist_access'
-    : 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=self_access';
 
   useEffect(() => {
     // Skip if no orderRef
@@ -56,7 +52,7 @@ const PaymentSuccessContent = () => {
     }
 
     try {
-      const price = getCurrentPrice();
+      const price = 595; // Ціна для самостійного тарифу
       const eventId = generateEventId();
       const fbp = getFbp();
       const fbc = getFbc();
@@ -72,7 +68,7 @@ const PaymentSuccessContent = () => {
       // Track Purchase event for Meta Pixel with eventID
       if (typeof window !== 'undefined' && window.fbq) {
         const eventData = {
-          content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+          content_name: 'Подорож до себе | Самостійне проходження',
           content_category: 'Online Course',
           value: price,
           currency: 'UAH',
@@ -148,7 +144,7 @@ const PaymentSuccessContent = () => {
             </li>
             <li className="flex items-start gap-3">
                 <span className="text-2xl font-bold" style={{ color: '#0C5C38' }}>✓</span>
-                <span className="font-semibold">Практикум стартує 5 січня</span>
+                <span className="font-semibold">Практикум доступний одразу після оплати</span>
             </li>
             <li className="flex items-start gap-3">
                 <span className="text-2xl font-bold" style={{ color: '#0C5C38' }}>✓</span>
@@ -200,7 +196,7 @@ const PaymentSuccessContent = () => {
   );
 };
 
-const PaymentSuccessPage = () => {
+const PaymentSuccessSelfPage = () => {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-white">
@@ -212,10 +208,9 @@ const PaymentSuccessPage = () => {
         </div>
       </div>
     }>
-      <PaymentSuccessContent />
+      <PaymentSuccessSelfContent />
     </Suspense>
   );
 };
 
-export default PaymentSuccessPage;
-
+export default PaymentSuccessSelfPage;

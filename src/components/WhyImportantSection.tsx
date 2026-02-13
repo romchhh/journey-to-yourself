@@ -16,27 +16,27 @@ const WhyImportantSection = () => {
           <div className="p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-lg transition-all relative overflow-hidden group" style={{ borderColor: '#E5E5E5' }}>
             <div className="absolute top-0 left-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(-30%, -30%)' }}></div>
             <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-semibold" style={{ color: '#2F2F2F' }}>
-              Більшість починають рік зі списку цілей і вимог до себе.
+              більшість починають зміни зі списку цілей та вимог до себе
             </p>
           </div>
           <div className="p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-lg transition-all relative overflow-hidden group" style={{ borderColor: '#E5E5E5' }}>
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
             <p className="text-xl md:text-2xl leading-relaxed text-center relative z-10 font-semibold" style={{ color: '#2F2F2F' }}>
-              Але коли всередині немає ясності – плани не працюють.
+              але коли всередині немає ясності – плани не працюють
             </p>
           </div>
           <div className="p-8 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all relative overflow-hidden group" style={{ backgroundColor: '#F0FDF4', borderColor: '#75DEAF' }}>
             <div className="absolute top-0 left-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(-25%, -25%)' }}></div>
             <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(25%, 25%)' }}></div>
             <p className="text-xl md:text-2xl leading-relaxed text-center font-black uppercase relative z-10" style={{ color: '#0C5C38' }}>
-              Починати рік із виснаження – це продовжувати минулий сценарій.
+              починати зміни з виснаження – це продовжувати минулий сценарій
             </p>
           </div>
           <div className="p-8 rounded-2xl border-2 shadow-lg hover:shadow-xl transition-all relative overflow-hidden group" style={{ backgroundColor: '#F0FDF4', borderColor: '#75DEAF' }}>
             <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(25%, -25%)' }}></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(-25%, 25%)' }}></div>
             <p className="text-xl md:text-2xl leading-relaxed text-center font-black uppercase relative z-10" style={{ color: '#0C5C38' }}>
-              Починати з ясності – це створювати новий.
+              починати з ясності – це створювати новий
             </p>
           </div>
         </div>

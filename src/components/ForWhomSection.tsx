@@ -12,7 +12,7 @@ const ForWhomSection = () => {
           <div className="w-24 h-1 rounded-full mx-auto" style={{ backgroundColor: '#75DEAF' }}></div>
         </div>
         <p className="text-xl md:text-2xl mb-10 text-center leading-relaxed max-w-3xl mx-auto font-normal uppercase" style={{ color: '#0C5C38' }}>
-          Для жінок, які хочуть почати рік без хаосу і виснаження – із ясністю та відчуттям себе
+          для жінок, які хочуть вийти з виснаження й рухатись далі з ясністю та опорою
         </p>
         <div className="p-10 rounded-3xl max-w-5xl mx-auto border-2 shadow-xl relative overflow-hidden grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#E5E5E5' }}>
           <div className="absolute top-0 left-0 w-40 h-40 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(-30%, -30%)' }}></div>

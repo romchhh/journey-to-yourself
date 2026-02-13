@@ -18,13 +18,17 @@ declare global {
   }
 }
 
-export const handlePayment = async () => {
+export const handlePayment = async (customPrice?: number, eventTitle?: string) => {
   try {
     console.log('[CLIENT] Starting payment process...');
     
+    const price = customPrice || getCurrentPrice();
+    const title = eventTitle || 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі';
+    // Визначаємо тип тарифу за ціною
+    const tariffType = price === 5400 ? 'psychologist' : 'self';
+    
     // Track InitiateCheckout event for Facebook Pixel and CAPI
     if (typeof window !== 'undefined') {
-      const price = getCurrentPrice();
       const eventId = generateEventId();
       const fbp = getFbp();
       const fbc = getFbc();
@@ -33,7 +37,7 @@ export const handlePayment = async () => {
       // Track in Pixel with eventID
       if (window.fbq) {
         const eventData = {
-          content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+          content_name: title,
           content_category: 'Online Course',
           value: price,
           currency: 'UAH',
@@ -78,6 +82,11 @@ export const handlePayment = async () => {
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        price: customPrice,
+        eventTitle: title,
+        tariffType: tariffType,
+      }),
     });
 
     console.log('[CLIENT] Payment API response status:', response.status);

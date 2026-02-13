@@ -32,7 +32,7 @@ const StatsSection = () => {
 
   const stats = [
     { number: '7', label: 'днів практичної роботи', icon: <IconCalendar /> },
-    { number: '2', label: 'Zoom-зустрічі', icon: <IconMessage /> },
+    { number: '1', label: 'власна карта року', icon: <IconMessage /> },
     { number: '14', label: 'практичних кроків до себе', icon: <IconClock /> },
     { number: '90', label: 'днів доступу до матеріалів', icon: <IconUnlock /> },
   ];

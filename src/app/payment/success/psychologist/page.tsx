@@ -32,15 +32,11 @@ declare global {
   }
 }
 
-const PaymentSuccessContent = () => {
+const PaymentSuccessPsychologistContent = () => {
+  // Посилання на бот для тарифу з психологом
+  const telegramBotUrl = 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=psychologist_access';
   const searchParams = useSearchParams();
   const orderRef = searchParams.get('orderRef') || '';
-  const tariffType = searchParams.get('tariffType') || 'self';
-  
-  // Визначаємо посилання на бот залежно від типу тарифу
-  const telegramBotUrl = tariffType === 'psychologist' 
-    ? 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=psychologist_access'
-    : 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=self_access';
 
   useEffect(() => {
     // Skip if no orderRef
@@ -56,7 +52,7 @@ const PaymentSuccessContent = () => {
     }
 
     try {
-      const price = getCurrentPrice();
+      const price = 5400; // Ціна для тарифу з психологом
       const eventId = generateEventId();
       const fbp = getFbp();
       const fbc = getFbc();
@@ -72,7 +68,7 @@ const PaymentSuccessContent = () => {
       // Track Purchase event for Meta Pixel with eventID
       if (typeof window !== 'undefined' && window.fbq) {
         const eventData = {
-          content_name: 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі',
+          content_name: 'Подорож до себе | З підтримкою психолога',
           content_category: 'Online Course',
           value: price,
           currency: 'UAH',
@@ -133,7 +129,7 @@ const PaymentSuccessContent = () => {
           </h1>
           <div className="w-24 h-1 rounded-full mx-auto mb-6" style={{ backgroundColor: '#75DEAF' }}></div>
             <p className="text-xl font-semibold mb-8 leading-relaxed" style={{ color: '#2F2F2F' }}>
-              Ваше замовлення успішно оформлено. Тепер ви можете пройти практикум через Telegram бот.
+              Ваше замовлення успішно оформлено. Тепер ви можете пройти практикум з підтримкою психолога через Telegram бот.
           </p>
         </div>
 
@@ -148,11 +144,15 @@ const PaymentSuccessContent = () => {
             </li>
             <li className="flex items-start gap-3">
                 <span className="text-2xl font-bold" style={{ color: '#0C5C38' }}>✓</span>
-                <span className="font-semibold">Практикум стартує 5 січня</span>
+                <span className="font-semibold">Практикум доступний одразу після оплати</span>
             </li>
             <li className="flex items-start gap-3">
                 <span className="text-2xl font-bold" style={{ color: '#0C5C38' }}>✓</span>
                 <span className="font-semibold">Доступ до матеріалів буде активний протягом 90 днів</span>
+            </li>
+            <li className="flex items-start gap-3">
+                <span className="text-2xl font-bold" style={{ color: '#0C5C38' }}>✓</span>
+                <span className="font-semibold">Ми зв'яжемося з вами для узгодження графіку індивідуальних зідзвонів</span>
             </li>
           </ul>
 
@@ -200,7 +200,7 @@ const PaymentSuccessContent = () => {
   );
 };
 
-const PaymentSuccessPage = () => {
+const PaymentSuccessPsychologistPage = () => {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-white">
@@ -212,10 +212,9 @@ const PaymentSuccessPage = () => {
         </div>
       </div>
     }>
-      <PaymentSuccessContent />
+      <PaymentSuccessPsychologistContent />
     </Suspense>
   );
 };
 
-export default PaymentSuccessPage;
-
+export default PaymentSuccessPsychologistPage;

@@ -16,6 +16,7 @@ const ResultsSection = lazy(() => import('@/components/ResultsSection'));
 const AboutAuthorSection = lazy(() => import('@/components/AboutAuthorSection'));
 const PauseSection = lazy(() => import('@/components/PauseSection'));
 const FAQSection = lazy(() => import('@/components/FAQSection'));
+const ReviewsSection = lazy(() => import('@/components/ReviewsSection'));
 const CTASection = lazy(() => import('@/components/CTASection'));
 
 const LoadingPlaceholder = () => (
@@ -41,6 +42,7 @@ export default function Home() {
       <AboutAuthorSection />
       <PauseSection />
       <FAQSection />
+      <ReviewsSection />
       <CTASection />
       </Suspense>
       <Footer />

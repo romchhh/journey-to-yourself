@@ -9,6 +9,7 @@ export async function GET(request: NextRequest) {
 
     const url = new URL(request.url);
     const orderRef = url.searchParams.get('orderRef') || '';
+    const tariffType = url.searchParams.get('tariffType') || 'self';
     const transactionStatus = url.searchParams.get('transactionStatus') || 
                              url.searchParams.get('status') || 
                              '';
@@ -16,6 +17,7 @@ export async function GET(request: NextRequest) {
 
     console.log('[PAYMENT RETURN] GET params:', {
       orderRef,
+      tariffType,
       transactionStatus,
       reasonCode,
       allParams: Object.fromEntries(url.searchParams.entries()),
@@ -30,8 +32,10 @@ export async function GET(request: NextRequest) {
                      reasonCode === '1100';
     
     if (isSuccess) {
-      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-      const successUrl = new URL(`/payment/success${query}`, origin).toString();
+      const queryParams = new URLSearchParams();
+      if (orderRef) queryParams.set('orderRef', orderRef);
+      queryParams.set('tariffType', tariffType);
+      const successUrl = new URL(`/payment/success/${tariffType}?${queryParams.toString()}`, origin).toString();
       console.log('[PAYMENT RETURN] GET redirect to success:', successUrl);
       return NextResponse.redirect(successUrl, 303);
     } else {
@@ -119,8 +123,7 @@ export async function POST(request: NextRequest) {
     });
 
     const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-
+    
     // Перевіряємо статус транзакції
     // WayForPay: transactionStatus === 'Approved' або reasonCode === '1100' означає успішну оплату
     const isSuccess = transactionStatus === 'Approved' || 
@@ -129,11 +132,19 @@ export async function POST(request: NextRequest) {
                      reasonCode === 1100;
     
     if (isSuccess) {
-      const successUrl = new URL(`/payment/success${query}`, origin).toString();
+      // Для POST запитів від WayForPay використовуємо orderRef для визначення типу тарифу
+      // Або можна використати дефолтний 'self', але краще передати через query параметр з GET запиту
+      const queryParams = new URLSearchParams();
+      if (orderRef) queryParams.set('orderRef', orderRef);
+      // Якщо немає tariffType в даних, використовуємо 'self' як дефолт
+      const tariffType = 'self'; // Можна визначити за orderRef або зберігати в БД
+      queryParams.set('tariffType', tariffType);
+      const successUrl = new URL(`/payment/success/${tariffType}?${queryParams.toString()}`, origin).toString();
       console.log('[PAYMENT RETURN] POST redirect to success:', successUrl);
       return NextResponse.redirect(successUrl, 303);
     } else {
       // Неуспішна оплата або статус не вказано
+      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
       const failureUrl = new URL(`/payment/failure${query}`, origin).toString();
       console.log('[PAYMENT RETURN] POST redirect to failure:', failureUrl);
       return NextResponse.redirect(failureUrl, 303);

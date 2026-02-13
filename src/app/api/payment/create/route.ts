@@ -38,8 +38,17 @@ export async function POST(request: NextRequest) {
     }
 
     // Product data
-    const eventTitle = 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі'; // Опис для WayForPay
-    const amount = getCurrentPrice(); // Динамічна ціна: 750 до 11 грудня, 850 після
+    let body: any = {};
+    try {
+      body = await request.json();
+    } catch (e) {
+      // Якщо body порожнє або не JSON, використовуємо дефолтні значення
+      body = {};
+    }
+    const customPrice = body?.price ? Number(body.price) : null;
+    const eventTitle = body?.eventTitle || 'Подорож до себе | 7-денний практикум у закритому Telegram-каналі'; // Опис для WayForPay
+    const amount = customPrice || getCurrentPrice(); // Використовуємо передану ціну або динамічну ціну
+    const tariffType = body?.tariffType || (amount === 5400 ? 'psychologist' : 'self'); // Тип тарифу
 
     // Генеруємо унікальний ID замовлення
     const orderReference = `JOURNEY_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
@@ -131,7 +140,7 @@ export async function POST(request: NextRequest) {
       productCount: productCounts,
       productPrice: productPrices.map(price => price.toFixed(2)), // З двома знаками після коми
       language: 'UA',
-      returnUrl: `${siteUrl}/api/payment/return?orderRef=${orderReference}`,
+      returnUrl: `${siteUrl}/api/payment/return?orderRef=${orderReference}&tariffType=${tariffType}`,
       serviceUrl: `${siteUrl}/api/payment/callback`,
     };
     

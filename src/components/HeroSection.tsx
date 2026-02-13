@@ -10,7 +10,7 @@ const HeroSection = () => {
   const priceText = getPriceText();
   
   const keyInfo = [
-    { icon: '/Старт.svg', label: 'Старт', value: '5 січня' },
+    { icon: '/Старт.svg', label: 'Старт', value: 'одразу після оплати' },
     { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
     { icon: '/Графік.svg', label: 'Ритм', value: '15-20 хвилин на день' },
     { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' }
@@ -41,18 +41,18 @@ const HeroSection = () => {
             
             {/* Підзаголовок */}
             <p className="text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase" style={{ color: '#0C5C38' }}>
-              7–денний практикум внутрішньої роботи, щоб почати новий рік інакше – з ясністю, опорою та розумінням, куди рухатись далі
+              7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – навіть якщо зараз відчувається виснаження і сил на зміни немає
             </p>
 
             {/* Ціна */}
             <div className="mb-10 p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
               <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
               <div className="relative z-10">
-                <div className="flex items-baseline gap-4 mb-3">
-                  <span className="text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500 грн</span>
-                  <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>{priceText}</span>
+                <div className="flex items-baseline gap-4 mb-2">
+                  <span className="text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500</span>
+                  <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>595 грн</span>
                 </div>
-                <p className="text-base font-semibold opacity-80" style={{ color: '#2F2F2F' }}>Період: 5–11 січня</p>
+                <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>самостійний формат</p>
               </div>
             </div>
 

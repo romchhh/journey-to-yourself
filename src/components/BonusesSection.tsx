@@ -1,49 +1,66 @@
+"use client";
+
 import React from 'react';
+import { handlePayment } from '@/utils/payment';
 
 const BonusesSection = () => {
+  const handlePsychologistPayment = () => {
+    handlePayment(5400, 'Подорож до себе | Формат з психологом');
+  };
+
+  const bonusItems = [
+    { title: 'Формат', description: 'проходження з психологом' },
+    { title: 'Темп', description: 'індивідуальний графік зідзвонів' },
+    { title: 'Цінність', description: '10500 5400 грн', hasStrikethrough: true },
+    { title: 'Зідзвон на старті', description: 'для визначення й усвідомлення цілей' },
+    { title: 'Зідзвон на екваторі', description: 'щоб не відступити, коли почне розхитувати' },
+    { title: 'Зідзвон у фіналі', description: 'щоб зафіксувати новий план і втримати результат' },
+  ];
+
   return (
     <section className="py-24 px-6 grain-texture grain-texture-green" style={{ backgroundColor: '#00A45A' }}>
       <div className="max-w-6xl mx-auto text-white">
         <div className="mb-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-black mb-3 uppercase tracking-tight">Що буде додатково</h2>
+          <h2 className="text-4xl md:text-5xl font-black mb-3 uppercase tracking-tight">ЯК ПІДВИЩИТИ СВОЇ ШАНСИ НА УСПІХ</h2>
           <div className="w-24 h-1 rounded-full mx-auto bg-white/30"></div>
         </div>
         <p className="text-xl md:text-2xl mb-12 text-center max-w-3xl mx-auto font-normal uppercase">
-          Щоб не "взяти і забути", а взяти і застосувати:
+          ЩОБ НЕ "ВЗЯТИ І ЗАБУТИ", А ПРОЙТИ І ЗАСТОСУВАТИ
         </p>
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-center hover:bg-white/20 transition-all hover:scale-110 transform shadow-lg relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(30%, -30%)' }}></div>
-            <div className="w-24 h-24 mx-auto mb-5 flex items-center justify-center rounded-full bg-white/20 border-2 border-white/40 relative z-10 group-hover:scale-110 transition-transform">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'white' }}>
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-              </svg>
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
+          {bonusItems.map((item, index) => (
+            <div 
+              key={index}
+              className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-center hover:bg-white/20 transition-all hover:scale-110 transform shadow-lg relative overflow-hidden group"
+            >
+              <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(30%, -30%)' }}></div>
+              <h3 className="text-xl md:text-2xl font-black mb-3 relative z-10 uppercase">{item.title}</h3>
+              <p className="opacity-90 text-lg relative z-10 font-semibold">
+                {item.hasStrikethrough ? (
+                  <>
+                    <span className="line-through opacity-60 mr-2">10500</span>
+                    <span>5400 грн</span>
+                  </>
+                ) : (
+                  item.description
+                )}
+              </p>
             </div>
-            <h3 className="text-xl md:text-2xl font-black mb-3 relative z-10 uppercase">Чат підтримки</h3>
-            <p className="opacity-90 text-lg relative z-10 font-semibold">з іншими учасницями</p>
-          </div>
-          <div className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-center hover:bg-white/20 transition-all hover:scale-110 transform shadow-lg relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(-30%, -30%)' }}></div>
-            <div className="w-24 h-24 mx-auto mb-5 flex items-center justify-center rounded-full bg-white/20 border-2 border-white/40 relative z-10 group-hover:scale-110 transition-transform">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'white' }}>
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2"/>
+          ))}
+        </div>
+        <div className="text-center">
+          <button 
+            onClick={handlePsychologistPayment}
+            className="px-16 py-8 rounded-full text-2xl font-black transition-all hover:bg-white/90 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group border-2 border-white bg-white"
+            style={{ color: '#0C5C38' }}
+          >
+            <span className="relative z-10 flex items-center gap-3 justify-center">
+              Придбати формат з психологом
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="none" className="group-hover:translate-x-1 transition-transform">
+                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
-            </div>
-            <h3 className="text-xl md:text-2xl font-black mb-3 relative z-10 uppercase">Зідзвон на старті</h3>
-            <p className="opacity-90 text-lg relative z-10 font-semibold">для визначення та усвідомлення цілей</p>
-          </div>
-          <div className="p-8 rounded-2xl bg-white/10 backdrop-blur-sm border-2 border-white/30 text-center hover:bg-white/20 transition-all hover:scale-110 transform shadow-lg relative overflow-hidden group">
-            <div className="absolute bottom-0 right-0 w-24 h-24 rounded-full opacity-10 group-hover:opacity-20 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(30%, 30%)' }}></div>
-            <div className="w-24 h-24 mx-auto mb-5 flex items-center justify-center rounded-full bg-white/20 border-2 border-white/40 relative z-10 group-hover:scale-110 transition-transform">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'white' }}>
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
-              </svg>
-            </div>
-            <h3 className="text-xl md:text-2xl font-black mb-3 relative z-10 uppercase">Зідзвон у фіналі</h3>
-            <p className="opacity-90 text-lg relative z-10 font-semibold">відповіді на питання + ефір "як втримати результат і не злити початок року"</p>
-          </div>
+            </span>
+          </button>
         </div>
       </div>
     </section>
