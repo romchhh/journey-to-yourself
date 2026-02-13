@@ -40,7 +40,7 @@ const CTASection = () => {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#75DEAF', flexShrink: 0, marginTop: '2px' }}>
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p className="text-base md:text-lg font-semibold" style={{ color: '#2F2F2F' }}>доступ до всіх 7 днів практикуму</p>
+                  <p className="text-base md:text-lg font-semibold" style={{ color: '#2F2F2F' }}>доступ до всіх 7-ми днів практикуму</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#75DEAF', flexShrink: 0, marginTop: '2px' }}>
@@ -107,7 +107,7 @@ const CTASection = () => {
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#75DEAF', flexShrink: 0, marginTop: '2px' }}>
                     <path d="M20 6L9 17l-5-5"/>
                   </svg>
-                  <p className="text-base md:text-lg font-semibold" style={{ color: '#2F2F2F' }}>доступ до всіх 7 днів практикуму</p>
+                  <p className="text-base md:text-lg font-semibold" style={{ color: '#2F2F2F' }}>доступ до всіх 7-ми днів практикуму</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: '#75DEAF', flexShrink: 0, marginTop: '2px' }}>
