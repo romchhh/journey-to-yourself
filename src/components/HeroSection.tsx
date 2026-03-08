@@ -44,17 +44,32 @@ const HeroSection = () => {
               7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – <span className="font-black">навіть якщо зараз відчувається виснаження і сил на зміни немає</span>
             </p>
 
-            {/* Ціна */}
-            <div className="mb-10 p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
-              <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-              <div className="relative z-10">
-                <div className="flex items-baseline gap-4 mb-2">
-                  <span className="text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500</span>
-                  <span className="text-6xl font-black" style={{ color: '#0C5C38' }}>595 грн</span>
+            {/* Ціни */}
+            <div className="mb-10 space-y-4">
+              <div className="p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
+                <div className="relative z-10">
+                  <div className="flex items-baseline gap-3 md:gap-4 mb-2 flex-wrap">
+                    <span className="text-xl md:text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500</span>
+                    <span className="text-4xl sm:text-5xl md:text-6xl font-black" style={{ color: '#0C5C38' }}>595 грн</span>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: самостійний</p>
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: самостійний</p>
-                  <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
+              </div>
+              <div className="p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
+                <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
+                <div className="relative z-10">
+                  <div className="flex items-baseline gap-3 md:gap-4 mb-2 flex-wrap">
+                    <span className="text-xl md:text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>10500</span>
+                    <span className="text-4xl sm:text-5xl md:text-6xl font-black" style={{ color: '#0C5C38' }}>5400 грн</span>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: з психологом</p>
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
+                  </div>
                 </div>
               </div>
             </div>
