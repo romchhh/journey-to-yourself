@@ -2,12 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { getCurrentPrice, getPriceTextInWords } from '@/utils/price';
 
 const OfferPage = () => {
-  const currentPrice = getCurrentPrice();
-  const priceTextInWords = getPriceTextInWords();
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -56,7 +52,7 @@ const OfferPage = () => {
                 про надання онлайн інформаційних послуг з психологічного практикуму
               </p>
               <p className="text-sm font-normal" style={{ color: '#2F2F2F' }}>
-                «1» грудня 2025 року м. Київ
+                «19» березня 2026 року м. Київ
               </p>
               <div className="w-24 h-1 rounded-full mt-4" style={{ backgroundColor: '#75DEAF' }}></div>
             </div>
@@ -100,7 +96,7 @@ const OfferPage = () => {
                 <strong>1.7.</strong> Терміни, що використовуються у цьому Договорі, вживаються у таких значеннях:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
-                <li><strong>1.7.1.</strong> Публічна оферта - пропозиція Виконавця про укладення Договору, розміщена на веб-сайті https://journey.anastasiiazavadska.com/ Виконавця та викладена Виконавцем в умовах цього Договору, що адресована невизначеному колу фізичних осіб;</li>
+                <li><strong>1.7.1.</strong> Публічна оферта - пропозиція Виконавця про укладення Договору, розміщена на веб-сайті Виконавця та викладена Виконавцем в умовах цього Договору, що адресована невизначеному колу фізичних осіб;</li>
                 <li><strong>1.7.2.</strong> Акцепт - повне, безумовне та беззастережне прийняття Замовником умов Договору шляхом повної оплати послуг Виконавця.</li>
                 <li><strong>1.7.3.</strong> Замовник - фізична особа, яка отримує від Виконавця послуги на умовах, передбачених Договором.</li>
               </ul>
@@ -138,20 +134,40 @@ const OfferPage = () => {
                 <strong>2.1.</strong> Виконавець зобов'язується надати Замовнику інформаційні послуги - проходження психологічного онлайн практикуму «Подорож до себе» згідно програми практикуму, а Замовник — оплатити її згідно умов Оферти.
               </p>
               
+              <p className="text-base leading-relaxed mb-4">
+                <strong>2.2.</strong> Онлайн практикум «Подорож до себе» надається за тарифом «індивідуальний супровід» або «самостійне проходження».
+              </p>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>2.3.</strong> Тариф Замовник обирає самостійно.
+              </p>
+              
               <p className="text-base leading-relaxed">
-                <strong>2.2.</strong> Освітня послуга включає: теоретичні та практичні заняття, методичні матеріали, онлайн та у форматі, визначеному Виконавцем.
+                <strong>2.4.</strong> Освітня послуга включає: теоретичні та практичні заняття, методичні матеріали, онлайн та у форматі, визначеному Виконавцем.
               </p>
             </div>
 
             <div className="p-8 rounded-2xl border-2 shadow-lg" style={{ backgroundColor: '#F8F9FA', borderColor: '#E5E5E5' }}>
-              <h2 className="text-2xl font-black mb-4 uppercase" style={{ color: '#0C5C38' }}>3. Умови оплати</h2>
+              <h2 className="text-2xl font-black mb-4 uppercase" style={{ color: '#0C5C38' }}>3. Вартість послуг та порядок оплати</h2>
               
               <p className="text-base leading-relaxed mb-4">
-                <strong>3.1.</strong> Загальна вартість курсу становить {currentPrice} ({priceTextInWords}) гривень.
+                <strong>3.1.</strong> Вартість послуг за цим Договором визначається залежно від обраного Замовником тарифу:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4 mb-4">
+                <li>Тариф «Індивідуальний супровід» – 5400 грн.</li>
+                <li>Тариф «Самостійне проходження» – 595 грн.</li>
+              </ul>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>3.2.</strong> Замовник самостійно обирає тариф під час оформлення замовлення та здійснює оплату у розмірі 100% вартості обраного тарифу.
+              </p>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>3.3.</strong> Оплата здійснюється шляхом безготівкового перерахування коштів через платіжні системи, доступні на сайті.
               </p>
               
               <p className="text-base leading-relaxed">
-                <strong>3.2.</strong> Повна оплата проводиться на рахунок Виконавця.
+                <strong>3.4.</strong> Моментом оплати вважається зарахування коштів на рахунок Виконавця.
               </p>
             </div>
 
@@ -159,19 +175,31 @@ const OfferPage = () => {
               <h2 className="text-2xl font-black mb-4 uppercase" style={{ color: '#0C5C38' }}>4. Надання доступу до інформаційного практикуму</h2>
               
               <p className="text-base leading-relaxed mb-4">
-                <strong>4.1.</strong> Інформаційний практикум проводиться Виконавцем у дату та час, зазначені на Сайті.
+                <strong>4.1.</strong> Послуги за тарифом «Самостійне проходження» надаються одразу після підтвердження оплати та надання доступу до матеріалів Практикуму. Доступ до матеріалів не залежить від конкретної дати початку та може бути використаний Замовником у зручний для нього час.
               </p>
               
               <p className="text-base leading-relaxed mb-4">
-                <strong>4.2.</strong> Тривалість практикуму визначається Виконавцем.
+                <strong>4.2.</strong> Послуги за тарифом «Індивідуальний супровід» надаються у строки, які узгоджуються індивідуально з Замовником.
               </p>
               
               <p className="text-base leading-relaxed mb-4">
-                <strong>4.3.</strong> Споживач немає права давати будь-яких вказівок щодо змісту практикуму.
+                <strong>4.3.</strong> Для отримання послуг за тарифом «Індивідуальний супровід» Замовник під час оплати зобов'язаний надати актуальні контактні дані для зв'язку. Виконавець зв'язується із Замовником для погодження графіку та формату надання послуг.
+              </p>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>4.4.</strong> Послуги вважаються наданими належним чином з моменту надання доступу до матеріалів (для тарифу «Самостійне проходження») або з моменту проведення узгоджених індивідуальних сесій/надання супроводу (для тарифу «Індивідуальний супровід»).
+              </p>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>4.5.</strong> Тривалість практикуму визначається Виконавцем.
+              </p>
+              
+              <p className="text-base leading-relaxed mb-4">
+                <strong>4.6.</strong> Споживач немає права давати будь-яких вказівок щодо змісту практикуму.
               </p>
               
               <p className="text-base leading-relaxed">
-                <strong>4.4.</strong> Для участі у практикумі Замовник повинен перейти за індивідуальним посиланням, що міститься в повідомленні про укладення Договору. Замовник самостійно забезпечує себе обладнанням, необхідним для участі у практикумі.
+                <strong>4.7.</strong> Для участі у практикумі Замовник повинен перейти за індивідуальним посиланням, що міститься в повідомленні про укладення Договору. Замовник самостійно забезпечує себе обладнанням, необхідним для участі у практикумі.
               </p>
             </div>
 
@@ -263,15 +291,10 @@ const OfferPage = () => {
               <h2 className="text-2xl font-black mb-4 uppercase" style={{ color: '#0C5C38' }}>11. Реквізити Виконавця</h2>
               
               <div className="space-y-2 text-base leading-relaxed">
-                <p><strong>ФОП Завадська Анастасія Сергіївна</strong></p>
-                <p>Код отримувача: 3080401528</p>
-                <p>Рахунок отримувача у форматі відповідно до стандарту</p>
-                <p>IBAN: UA363052990000026000043905927</p>
-                <p>Назва банку: АТ КБ «ПриватБанк»</p>
-                <p>Адреса: онлайн</p>
-                <p>Телефон: +380506230688</p>
-                <p>Email або Instagram/Telegram: <a href="https://www.instagram.com/anastasiia__zavadska" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://www.instagram.com/anastasiia__zavadska</a></p>
-                <p>Сайт: <a href="https://journey.anastasiiazavadska.com/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://journey.anastasiiazavadska.com/</a></p>
+                <p><strong>ФОП:</strong> Завадська Анастасія Сергіївна</p>
+                <p><strong>Адреса:</strong> онлайн</p>
+                <p><strong>Телефон:</strong> +380506230688</p>
+                <p><strong>Email або Instagram/Telegram:</strong> <a href="https://journey.anastasiiazavadska.com/" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-80" style={{ color: '#0C5C38' }}>https://journey.anastasiiazavadska.com/</a></p>
               </div>
             </div>
 
