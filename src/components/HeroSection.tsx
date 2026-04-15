@@ -17,7 +17,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="pt-32 pb-24 px-4 sm:px-6 relative overflow-x-hidden">
+    <section className="pt-32 pb-24 px-4 sm:px-6 relative touch-pan-y">
       {/* Декоративні елементи */}
       <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(50%, -50%)' }}></div>
       <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(-50%, 50%)' }}></div>
