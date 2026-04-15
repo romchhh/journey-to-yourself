@@ -17,15 +17,15 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="pt-32 pb-24 px-6 relative overflow-hidden">
+    <section className="pt-32 pb-24 px-4 sm:px-6 relative overflow-x-hidden">
       {/* Декоративні елементи */}
       <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(50%, -50%)' }}></div>
       <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(-50%, 50%)' }}></div>
       
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto relative z-10 w-full min-w-0">
+        <div className="grid lg:grid-cols-2 gap-16 items-center lg:items-start w-full min-w-0">
           {/* Ліва частина - контент */}
-          <div>
+          <div className="min-w-0 w-full max-w-full">
             {/* Бейдж */}
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-semibold shadow-md" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -35,23 +35,26 @@ const HeroSection = () => {
             </div>
 
             {/* Заголовок */}
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-black mb-6 leading-[1.05] tracking-tight uppercase" style={{ color: '#0C5C38' }}>
+            <h1
+              className="max-w-full min-w-0 font-black mb-6 leading-[1.05] tracking-tight uppercase break-words text-balance hyphens-auto text-4xl min-[380px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl [overflow-wrap:anywhere]"
+              style={{ color: '#0C5C38' }}
+            >
               Подорож до себе
             </h1>
             
             {/* Підзаголовок */}
-            <p className="text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase" style={{ color: '#0C5C38' }}>
+            <p className="max-w-full min-w-0 text-balance break-words hyphens-auto text-xl min-[380px]:text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase [overflow-wrap:anywhere]" style={{ color: '#0C5C38' }}>
               7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – <span className="font-black">навіть якщо зараз відчувається виснаження і сил на зміни немає</span>
             </p>
 
             {/* Ціни */}
-            <div className="mb-10 space-y-4">
-              <div className="p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
+            <div className="mb-10 space-y-4 w-full min-w-0 max-w-full max-lg:text-center">
+              <div className="p-5 sm:p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white max-w-full min-w-0" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
                 <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                <div className="relative z-10">
-                  <div className="flex items-baseline gap-3 md:gap-4 mb-2 flex-wrap">
-                    <span className="text-xl md:text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>4500</span>
-                    <span className="text-4xl sm:text-5xl md:text-6xl font-black" style={{ color: '#0C5C38' }}>595 грн</span>
+                <div className="relative z-10 lg:text-left min-w-0">
+                  <div className="flex w-full min-w-0 max-w-full items-baseline gap-2 sm:gap-3 md:gap-4 mb-2 flex-wrap justify-center lg:justify-start">
+                    <span className="text-xl md:text-2xl line-through opacity-50 shrink-0" style={{ color: '#2F2F2F' }}>4500</span>
+                    <span className="text-3xl sm:text-5xl md:text-6xl font-black break-words text-balance" style={{ color: '#0C5C38' }}>595 грн</span>
                   </div>
                   <div className="space-y-1">
                     <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: самостійний</p>
@@ -59,12 +62,12 @@ const HeroSection = () => {
                   </div>
                 </div>
               </div>
-              <div className="p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
+              <div className="p-5 sm:p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white max-w-full min-w-0" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
                 <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                <div className="relative z-10">
-                  <div className="flex items-baseline gap-3 md:gap-4 mb-2 flex-wrap">
-                    <span className="text-xl md:text-2xl line-through opacity-50" style={{ color: '#2F2F2F' }}>10500</span>
-                    <span className="text-4xl sm:text-5xl md:text-6xl font-black" style={{ color: '#0C5C38' }}>5400 грн</span>
+                <div className="relative z-10 lg:text-left min-w-0">
+                  <div className="flex w-full min-w-0 max-w-full items-baseline gap-2 sm:gap-3 md:gap-4 mb-2 flex-wrap justify-center lg:justify-start">
+                    <span className="text-xl md:text-2xl line-through opacity-50 shrink-0" style={{ color: '#2F2F2F' }}>10500</span>
+                    <span className="text-3xl sm:text-5xl md:text-6xl font-black break-words text-balance" style={{ color: '#0C5C38' }}>5400 грн</span>
                   </div>
                   <div className="space-y-1">
                     <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: з психологом</p>
@@ -116,7 +119,7 @@ const HeroSection = () => {
           </div>
           
           {/* Права частина - фото */}
-          <div className="relative">
+          <div className="relative min-w-0 w-full max-w-full lg:-mt-10">
             <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative group grain-texture-image">
               <Image 
                 src="/0U0A7235.jpg" 
