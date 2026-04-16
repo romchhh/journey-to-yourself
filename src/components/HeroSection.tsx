@@ -3,107 +3,220 @@
 import React from 'react';
 import Image from 'next/image';
 import { handlePayment } from '@/utils/payment';
-import { getCurrentPrice, getPriceText } from '@/utils/price';
 
-const HeroSection = () => {
-  const currentPrice = getCurrentPrice();
-  const priceText = getPriceText();
-  
-  const keyInfo = [
-    { icon: '/Старт.svg', label: 'Старт', value: 'одразу після оплати' },
-    { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
-    { icon: '/Графік.svg', label: 'Ритм', value: '15-20 хвилин на день' },
-    { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' }
-  ];
+const HERO_KEY_INFO = [
+  { icon: '/Старт.svg', label: 'Старт', value: 'одразу після оплати' },
+  { icon: '/Формат.svg', label: 'Формат', value: 'Telegram чат-бот' },
+  { icon: '/Графік.svg', label: 'Ритм', value: '15-20 хвилин на день' },
+  { icon: '/Доступ.svg', label: 'Доступ', value: '90 днів' },
+] as const;
+
+function HeroKeyInfoRow({
+  mode,
+  className = '',
+}: {
+  mode: 'mobile' | 'desktop';
+  className?: string;
+}) {
+  const isMobile = mode === 'mobile';
 
   return (
-    <section className="pt-32 pb-24 px-4 sm:px-6 relative touch-pan-y">
+    <div
+      className={`grid min-w-0 ${
+        isMobile ? 'grid-cols-2 gap-4' : 'grid-cols-4 gap-4 sm:gap-6 lg:gap-8 xl:gap-10'
+      } ${className}`}
+      role="list"
+    >
+      {HERO_KEY_INFO.map((item, index) => (
+        <div
+          key={index}
+          role="listitem"
+          className={`group grain-texture grain-texture-white relative flex min-w-0 flex-col items-center justify-center overflow-hidden border-2 bg-white text-center shadow-md transition-all hover:shadow-xl ${
+            isMobile
+              ? 'transform rounded-xl p-5 hover:scale-105'
+              : 'rounded-xl p-5 sm:rounded-2xl sm:p-6 lg:p-8 lg:hover:scale-[1.02]'
+          }`}
+          style={{ borderColor: '#E5E5E5' }}
+        >
+          <div
+            className="absolute top-0 right-0 h-16 w-16 rounded-full opacity-5 transition-opacity group-hover:opacity-10"
+            style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}
+          />
+          <div className={`relative z-10 shrink-0 ${isMobile ? 'mb-3' : 'mb-3 sm:mb-4'}`}>
+            <img
+              src={item.icon}
+              alt=""
+              className={`mx-auto ${isMobile ? 'h-12 w-12' : 'h-11 w-11 sm:h-12 sm:w-12 lg:h-14 lg:w-14'}`}
+            />
+          </div>
+          {item.label && (
+            <span
+              className={`relative z-10 font-semibold uppercase tracking-wide ${
+                isMobile
+                  ? 'mb-1 text-sm'
+                  : 'mb-1 text-sm tracking-wide sm:mb-2 sm:text-base lg:text-lg'
+              }`}
+              style={{ color: '#0C5C38' }}
+            >
+              {item.label}
+            </span>
+          )}
+          <p
+            className={`relative z-10 break-words font-semibold hyphens-auto ${
+              isMobile ? 'text-lg leading-snug' : 'text-sm leading-snug sm:text-base lg:text-lg xl:text-xl'
+            }`}
+            style={{ color: '#2F2F2F' }}
+          >
+            {item.value}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const HeroSection = () => {
+  return (
+    <section className="relative touch-pan-y pt-32 pb-24 px-4 sm:px-6">
       {/* Декоративні елементи */}
-      <div className="absolute top-20 right-10 w-64 h-64 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(50%, -50%)' }}></div>
-      <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(-50%, 50%)' }}></div>
-      
-      <div className="max-w-7xl mx-auto relative z-10 w-full min-w-0">
-        <div className="grid lg:grid-cols-2 gap-16 items-center lg:items-start w-full min-w-0">
-          {/* Ліва частина - контент */}
-          <div className="min-w-0 w-full max-w-full">
+      <div
+        className="absolute top-20 right-10 h-64 w-64 rounded-full opacity-5"
+        style={{ backgroundColor: '#75DEAF', transform: 'translate(50%, -50%)' }}
+      />
+      <div
+        className="absolute bottom-20 left-10 h-48 w-48 rounded-full opacity-5"
+        style={{ backgroundColor: '#0C5C38', transform: 'translate(-50%, 50%)' }}
+      />
+
+      <div className="relative z-10 mx-auto w-full min-w-0 max-w-7xl">
+        <div className="grid w-full min-w-0 grid-cols-1 items-center gap-8 md:gap-16 lg:grid-cols-2 lg:items-start">
+          {/* Ліва частина — до цін (кнопка окремим рядком сітки, під ключами на моб) */}
+          <div className="min-w-0 w-full max-w-full lg:col-start-1 lg:row-start-1">
             {/* Бейдж */}
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full mb-6 text-sm font-semibold shadow-md" style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+            <div
+              className="mb-6 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold shadow-md"
+              style={{ backgroundColor: '#75DEAF', color: '#0C5C38' }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
               </svg>
               <span>7-денний практикум</span>
             </div>
 
             {/* Заголовок */}
             <h1
-              className="max-w-full min-w-0 font-black mb-6 leading-[1.05] tracking-tight uppercase break-words text-balance hyphens-auto text-4xl min-[380px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl [overflow-wrap:anywhere]"
+              className="mb-6 max-w-full min-w-0 hyphens-auto text-balance break-words text-4xl font-black leading-[1.05] tracking-tight uppercase [overflow-wrap:anywhere] min-[380px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
               style={{ color: '#0C5C38' }}
             >
               Подорож до себе
             </h1>
-            
+
             {/* Підзаголовок */}
-            <p className="max-w-full min-w-0 text-balance break-words hyphens-auto text-xl min-[380px]:text-2xl md:text-3xl mb-10 leading-relaxed font-normal uppercase [overflow-wrap:anywhere]" style={{ color: '#0C5C38' }}>
-              7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує – <span className="font-black">навіть якщо зараз відчувається виснаження і сил на зміни немає</span>
+            <p
+              className="mb-10 max-w-full min-w-0 hyphens-auto text-balance break-words text-xl font-normal uppercase leading-relaxed [overflow-wrap:anywhere] min-[380px]:text-2xl md:text-3xl"
+              style={{ color: '#0C5C38' }}
+            >
+              7-денний практикум внутрішньої роботи, щоб почати змінювати життя, яке більше не влаштовує –{' '}
+              <span className="font-black">навіть якщо зараз відчувається виснаження і сил на зміни немає</span>
             </p>
 
             {/* Ціни */}
-            <div className="mb-10 space-y-4 w-full min-w-0 max-w-full max-lg:text-center">
-              <div className="p-5 sm:p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white max-w-full min-w-0" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                <div className="relative z-10 lg:text-left min-w-0">
-                  <div className="flex w-full min-w-0 max-w-full items-baseline gap-2 sm:gap-3 md:gap-4 mb-2 flex-wrap justify-center lg:justify-start">
-                    <span className="text-xl md:text-2xl line-through opacity-50 shrink-0" style={{ color: '#2F2F2F' }}>4500</span>
-                    <span className="text-3xl sm:text-5xl md:text-6xl font-black break-words text-balance" style={{ color: '#0C5C38' }}>595 грн</span>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: самостійний</p>
-                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
-                  </div>
-                </div>
-              </div>
-              <div className="p-5 sm:p-8 rounded-2xl border-2 shadow-xl relative overflow-hidden group grain-texture grain-texture-white max-w-full min-w-0" style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}>
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                <div className="relative z-10 lg:text-left min-w-0">
-                  <div className="flex w-full min-w-0 max-w-full items-baseline gap-2 sm:gap-3 md:gap-4 mb-2 flex-wrap justify-center lg:justify-start">
-                    <span className="text-xl md:text-2xl line-through opacity-50 shrink-0" style={{ color: '#2F2F2F' }}>10500</span>
-                    <span className="text-3xl sm:text-5xl md:text-6xl font-black break-words text-balance" style={{ color: '#0C5C38' }}>5400 грн</span>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>формат: з психологом</p>
-                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>початок: будь-коли</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Ключова інформація */}
-            <div className="grid grid-cols-2 gap-4 mb-10">
-              {keyInfo.map((item, index) => (
-                <div 
-                  key={index}
-                  className="p-5 rounded-xl border-2 bg-white shadow-md hover:shadow-xl transition-all hover:scale-105 transform relative overflow-hidden group grain-texture grain-texture-white flex flex-col items-center justify-center text-center"
-                  style={{ borderColor: '#E5E5E5' }}
-                >
-                  <div className="absolute top-0 right-0 w-16 h-16 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
-                  <div className="mb-3 relative z-10">
-                    <img src={item.icon} alt="" className="w-12 h-12" />
-                    </div>
-                  {item.label && (
-                    <span className="text-sm font-semibold uppercase tracking-wide mb-1 relative z-10" style={{ color: '#0C5C38' }}>
-                      {item.label}
+            <div className="mb-10 max-w-full min-w-0 space-y-4 max-lg:text-center">
+              <div
+                className="group grain-texture grain-texture-white relative max-w-full min-w-0 overflow-hidden rounded-2xl border-2 p-5 shadow-xl sm:p-8"
+                style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}
+              >
+                <div
+                  className="absolute top-0 right-0 h-32 w-32 rounded-full opacity-10 transition-opacity group-hover:opacity-15"
+                  style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}
+                />
+                <div className="relative z-10 min-w-0 lg:text-left">
+                  <div className="mb-2 flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-2 sm:gap-3 md:gap-4 lg:justify-start">
+                    <span className="shrink-0 text-xl line-through opacity-50 md:text-2xl" style={{ color: '#2F2F2F' }}>
+                      4500
                     </span>
-                  )}
-                  <p className="text-lg font-semibold relative z-10" style={{ color: '#2F2F2F' }}>{item.value}</p>
+                    <span className="text-3xl font-black break-words text-balance sm:text-5xl md:text-6xl" style={{ color: '#0C5C38' }}>
+                      595 грн
+                    </span>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>
+                      формат: самостійний
+                    </p>
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>
+                      початок: будь-коли
+                    </p>
+                  </div>
                 </div>
-              ))}
+              </div>
+              <div
+                className="group grain-texture grain-texture-white relative max-w-full min-w-0 overflow-hidden rounded-2xl border-2 p-5 shadow-xl sm:p-8"
+                style={{ backgroundColor: '#F8F9FA', borderColor: '#75DEAF' }}
+              >
+                <div
+                  className="absolute top-0 right-0 h-32 w-32 rounded-full opacity-10 transition-opacity group-hover:opacity-15"
+                  style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}
+                />
+                <div className="relative z-10 min-w-0 lg:text-left">
+                  <div className="mb-2 flex min-w-0 max-w-full flex-wrap items-baseline justify-center gap-2 sm:gap-3 md:gap-4 lg:justify-start">
+                    <span className="shrink-0 text-xl line-through opacity-50 md:text-2xl" style={{ color: '#2F2F2F' }}>
+                      10500
+                    </span>
+                    <span className="text-3xl font-black break-words text-balance sm:text-5xl md:text-6xl" style={{ color: '#0C5C38' }}>
+                      5400 грн
+                    </span>
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>
+                      формат: з психологом
+                    </p>
+                    <p className="text-sm font-medium opacity-70" style={{ color: '#2F2F2F' }}>
+                      початок: будь-коли
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
 
-            {/* Кнопка */}
-            <button 
+          {/* Права частина - фото */}
+          <div className="relative min-w-0 w-full max-w-full lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:self-start lg:mt-12 xl:mt-14">
+            <div className="grain-texture-image group relative overflow-hidden rounded-3xl border-4 border-white shadow-2xl">
+              <Image
+                src="/0U0A7235.jpg"
+                alt="Подорож до себе"
+                width={800}
+                height={1000}
+                className="relative z-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                priority
+                quality={90}
+              />
+              <div className="absolute inset-0 z-10 bg-gradient-to-br from-transparent via-transparent to-black/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </div>
+            <div
+              className="absolute -right-6 -bottom-6 h-32 w-32 rounded-full opacity-20"
+              style={{ backgroundColor: '#75DEAF', zIndex: -1 }}
+            />
+          </div>
+
+          {/* Моб / планшет: під фото, два рядки по дві картки */}
+          <HeroKeyInfoRow mode="mobile" className="max-lg:mb-0 lg:hidden" />
+
+          {/* Кнопка — на моб після ключів; на lg залишається в першій колонці */}
+          <div className="min-w-0 w-full max-w-full lg:col-start-1 lg:row-start-2">
+            <button
               onClick={() => handlePayment()}
-              className="w-full md:w-auto px-14 py-7 rounded-full text-xl font-semibold transition-all hover:bg-[#0C5C38]/10 shadow-xl hover:shadow-2xl transform hover:scale-105 relative overflow-hidden group border-2"
-              style={{ 
+              className="group relative w-full transform overflow-hidden rounded-full border-2 px-14 py-7 text-xl font-semibold shadow-xl transition-all hover:scale-105 hover:shadow-2xl hover:bg-[#0C5C38]/10 md:w-auto"
+              style={{
                 borderColor: '#0C5C38',
                 color: '#0C5C38',
                 backgroundColor: 'transparent',
@@ -111,35 +224,36 @@ const HeroSection = () => {
             >
               <span className="relative z-10 flex items-center gap-3">
                 Приєднатись до практикуму
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="group-hover:translate-x-1 transition-transform">
-                  <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  className="transition-transform group-hover:translate-x-1"
+                >
+                  <path
+                    d="M7.5 15L12.5 10L7.5 5"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </span>
             </button>
           </div>
-          
-          {/* Права частина - фото */}
-          <div className="relative min-w-0 w-full max-w-full lg:-mt-10">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative group grain-texture-image">
-              <Image 
-                src="/0U0A7235.jpg" 
-                alt="Подорож до себе" 
-                width={800}
-                height={1000}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 relative z-0"
-                priority
-                quality={90}
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-            </div>
-            {/* Декоративний елемент */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-full opacity-20" style={{ backgroundColor: '#75DEAF', zIndex: -1 }}></div>
-          </div>
         </div>
+      </div>
+
+      {/* Десктоп: один ряд на всю ширину вікна */}
+      <div
+        className="relative z-10 mt-10 hidden min-w-0 lg:block w-screen max-w-[100vw] left-1/2 -translate-x-1/2 px-4 sm:px-8 lg:px-12 xl:px-16"
+        aria-label="Ключові умови практикуму"
+      >
+        <HeroKeyInfoRow mode="desktop" />
       </div>
     </section>
   );
 };
 
 export default HeroSection;
-
