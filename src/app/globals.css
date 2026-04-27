@@ -30,16 +30,25 @@
   }
 }
 
+/* Сторінка не скролиться вліво/вправо (включно з iOS) */
+html,
+body {
+  overflow-x: hidden !important;
+  max-width: 100%;
+  width: 100%;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: #FFFFFF;
   color: #2F2F2F;
   font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
-  overflow-x: hidden;
-  overscroll-behavior-x: none;
-  touch-action: pan-y;
-  max-width: 100%;
-  width: 100%;
   position: relative;
 }
 
@@ -69,15 +78,6 @@ body {
 
 .animate-pulse-slow {
   animation: pulse 2s ease-in-out infinite;
-}
-
-/* Smooth scroll + захист від горизонтального скролу на мобільних */
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  overscroll-behavior-x: none;
-  max-width: 100%;
-  width: 100%;
 }
 
 /* Scroll animations */

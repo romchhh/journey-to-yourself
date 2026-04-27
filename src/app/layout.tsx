@@ -82,7 +82,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="uk">
+    <html lang="uk" className="overflow-x-hidden">
       <head>
         {/* Google Tag Manager — якомога ближче до відкриваючого <head> */}
         <Script
@@ -98,7 +98,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body
-        className={`${montserrat.variable} antialiased`}
+        className={`${montserrat.variable} antialiased overflow-x-hidden`}
         style={{ fontFamily: 'var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
       >
         {/* Google Tag Manager (noscript) — одразу після <body> */}
