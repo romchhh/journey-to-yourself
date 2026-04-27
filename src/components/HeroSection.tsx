@@ -80,11 +80,11 @@ const HeroSection = () => {
     <section className="relative touch-pan-y pt-32 pb-24 px-4 sm:px-6">
       {/* Декоративні елементи */}
       <div
-        className="absolute top-20 right-10 h-64 w-64 rounded-full opacity-5"
+        className="absolute top-20 right-10 hidden h-64 w-64 rounded-full opacity-5 lg:block"
         style={{ backgroundColor: '#75DEAF', transform: 'translate(50%, -50%)' }}
       />
       <div
-        className="absolute bottom-20 left-10 h-48 w-48 rounded-full opacity-5"
+        className="absolute bottom-20 left-10 hidden h-48 w-48 rounded-full opacity-5 lg:block"
         style={{ backgroundColor: '#0C5C38', transform: 'translate(-50%, 50%)' }}
       />
 
@@ -203,7 +203,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 z-10 bg-gradient-to-br from-transparent via-transparent to-black/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </div>
             <div
-              className="absolute -right-6 -bottom-6 h-32 w-32 rounded-full opacity-20"
+              className="absolute -right-6 -bottom-6 hidden h-32 w-32 rounded-full opacity-20 lg:block"
               style={{ backgroundColor: '#75DEAF', zIndex: -1 }}
             />
           </div>
