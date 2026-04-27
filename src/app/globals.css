@@ -35,6 +35,8 @@ body {
   color: #2F2F2F;
   font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 @keyframes fadeInUp {
@@ -65,10 +67,10 @@ body {
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* Smooth scroll; горизонталь тільки тут — не на секціях, щоб не ламати скрол на iOS */
+/* Smooth scroll + захист від горизонтального скролу на мобільних */
 html {
   scroll-behavior: smooth;
-  overflow-x: clip;
+  overflow-x: hidden;
   max-width: 100%;
 }
 
