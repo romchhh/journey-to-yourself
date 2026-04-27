@@ -31,7 +31,7 @@ function HeroKeyInfoRow({
         <div
           key={index}
           role="listitem"
-          className={`group grain-texture grain-texture-white relative flex min-w-0 flex-col items-center justify-center overflow-hidden border-2 bg-white text-center shadow-md transition-all hover:shadow-xl ${
+          className={`group grain-texture grain-texture-white relative flex min-w-0 max-w-full flex-col items-center justify-center overflow-hidden border-2 bg-white text-center shadow-md transition-all hover:shadow-xl ${
             isMobile
               ? 'transform rounded-xl p-5 hover:scale-105'
               : 'rounded-xl p-5 sm:rounded-2xl sm:p-6 lg:p-8 lg:hover:scale-[1.02]'
@@ -62,8 +62,8 @@ function HeroKeyInfoRow({
             </span>
           )}
           <p
-            className={`relative z-10 break-words font-semibold hyphens-auto ${
-              isMobile ? 'text-lg leading-snug' : 'text-sm leading-snug sm:text-base lg:text-lg xl:text-xl'
+            className={`relative z-10 break-words font-semibold hyphens-auto [overflow-wrap:anywhere] ${
+              isMobile ? 'text-sm leading-snug sm:text-base' : 'text-sm leading-snug sm:text-base lg:text-lg xl:text-xl'
             }`}
             style={{ color: '#2F2F2F' }}
           >
@@ -215,14 +215,14 @@ const HeroSection = () => {
           <div className="min-w-0 w-full max-w-full lg:col-start-1 lg:row-start-2">
             <button
               onClick={() => handlePayment()}
-              className="group relative w-full transform overflow-hidden rounded-full border-2 px-14 py-7 text-xl font-semibold shadow-xl transition-all hover:scale-105 hover:shadow-2xl hover:bg-[#0C5C38]/10 md:w-auto"
+              className="group relative w-full max-w-full transform overflow-hidden rounded-full border-2 px-6 py-5 text-base font-semibold leading-tight shadow-xl transition-all hover:scale-105 hover:shadow-2xl hover:bg-[#0C5C38]/10 sm:px-10 sm:py-6 sm:text-lg md:w-auto md:px-14 md:py-7 md:text-xl"
               style={{
                 borderColor: '#0C5C38',
                 color: '#0C5C38',
                 backgroundColor: 'transparent',
               }}
             >
-              <span className="relative z-10 flex items-center gap-3">
+              <span className="relative z-10 flex min-w-0 items-center justify-center gap-2 break-words text-center [overflow-wrap:anywhere] sm:gap-3">
                 Приєднатись до практикуму
                 <svg
                   width="20"
