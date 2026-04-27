@@ -3,26 +3,35 @@
 import React, { useState, useEffect } from 'react';
 import { handlePayment } from '@/utils/payment';
 
+const getSiteScrollRoot = (): HTMLElement | null =>
+  typeof document !== 'undefined' ? document.getElementById('site-scroll') : null;
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    const root = getSiteScrollRoot();
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const y = root ? root.scrollTop : window.scrollY;
+      setIsScrolled(y > 20);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const target: HTMLElement | Window = root ?? window;
+    target.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => target.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
+    const root = getSiteScrollRoot();
+    if (!root) return;
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      root.style.overflowY = 'hidden';
     } else {
-      document.body.style.overflow = 'unset';
+      root.style.overflowY = '';
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      root.style.overflowY = '';
     };
   }, [isMobileMenuOpen]);
 
@@ -56,7 +65,9 @@ const Header = () => {
           <div className="flex items-center relative z-[80]">
             <button
               onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                const root = getSiteScrollRoot();
+                if (root) root.scrollTo({ top: 0, behavior: 'smooth' });
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
                 setIsMobileMenuOpen(false);
               }}
               className="hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-[#75DEAF] focus:ring-offset-2 rounded"

@@ -82,7 +82,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="uk" className="overflow-x-hidden">
+    <html lang="uk" className="h-full overflow-hidden">
       <head>
         {/* Google Tag Manager — якомога ближче до відкриваючого <head> */}
         <Script
@@ -98,7 +98,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         />
       </head>
       <body
-        className={`${montserrat.variable} antialiased overflow-x-hidden`}
+        className={`${montserrat.variable} antialiased h-full max-h-[100dvh] overflow-hidden`}
         style={{ fontFamily: 'var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }}
       >
         {/* Google Tag Manager (noscript) — одразу після <body> */}
@@ -161,8 +161,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Meta Pixel Code */}
-        <FacebookPageView />
-        {children}
+        <div id="site-scroll" className="site-scroll">
+          <FacebookPageView />
+          {children}
+        </div>
       </body>
     </html>
   );

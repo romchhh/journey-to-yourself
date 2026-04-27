@@ -30,26 +30,35 @@
   }
 }
 
-/* Сторінка не скролиться вліво/вправо (включно з iOS) */
-html,
-body {
-  overflow-x: hidden !important;
-  max-width: 100%;
-  width: 100%;
-  overscroll-behavior-x: none;
-  touch-action: pan-y;
-}
-
+/*
+ * iOS Safari: горизонтальний «pan» часто йде по document, а не по overflow-x на body.
+ * Тому скрол переносимо всередину .site-scroll (фіксована висота в’юпорта + overflow-y).
+ */
 html {
-  scroll-behavior: smooth;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
+  height: 100%;
+  max-height: 100dvh;
+  margin: 0;
+  overflow: hidden;
   background: #FFFFFF;
   color: #2F2F2F;
   font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
   position: relative;
+}
+
+.site-scroll {
+  height: 100%;
+  max-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: none;
+  scroll-behavior: smooth;
 }
 
 @keyframes fadeInUp {
