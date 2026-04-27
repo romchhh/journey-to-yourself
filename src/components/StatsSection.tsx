@@ -38,17 +38,17 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="py-24 px-6 relative overflow-hidden grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA' }}>
+    <section className="py-24 px-4 sm:px-6 relative overflow-hidden grain-texture grain-texture-white" style={{ backgroundColor: '#F8F9FA' }}>
       {/* Декоративні елементи */}
-      <div className="absolute top-0 left-0 w-64 h-64 rounded-full opacity-5" style={{ backgroundColor: '#75DEAF', transform: 'translate(-50%, -50%)' }}></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 rounded-full opacity-5" style={{ backgroundColor: '#0C5C38', transform: 'translate(50%, 50%)' }}></div>
+      <div className="absolute top-0 left-0 hidden w-64 h-64 rounded-full opacity-5 lg:block" style={{ backgroundColor: '#75DEAF', transform: 'translate(-50%, -50%)' }}></div>
+      <div className="absolute bottom-0 right-0 hidden w-64 h-64 rounded-full opacity-5 lg:block" style={{ backgroundColor: '#0C5C38', transform: 'translate(50%, 50%)' }}></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
           {stats.map((stat, index) => (
             <div 
               key={index}
-              className="text-center p-8 rounded-2xl bg-white border-2 shadow-lg hover:shadow-2xl transition-all hover:scale-110 transform relative overflow-hidden group grain-texture grain-texture-white"
+              className="text-center p-4 sm:p-8 rounded-2xl bg-white border-2 shadow-lg hover:shadow-2xl transition-all md:hover:scale-110 transform relative overflow-hidden group grain-texture grain-texture-white min-w-0 max-w-full"
               style={{ borderColor: '#E5E5E5' }}
             >
               <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
@@ -59,10 +59,10 @@ const StatsSection = () => {
                     {stat.icon}
                   </div>
                 </div>
-                <div className="text-5xl md:text-6xl font-black mb-3" style={{ color: '#0C5C38' }}>
+                <div className="text-3xl sm:text-4xl md:text-6xl font-black mb-2 sm:mb-3" style={{ color: '#0C5C38' }}>
                   {stat.number}
                 </div>
-                <div className="text-sm md:text-base font-semibold leading-relaxed" style={{ color: '#2F2F2F' }}>
+                <div className="text-xs sm:text-sm md:text-base font-semibold leading-snug sm:leading-relaxed break-words [overflow-wrap:anywhere]" style={{ color: '#2F2F2F' }}>
                   {stat.label}
                 </div>
               </div>

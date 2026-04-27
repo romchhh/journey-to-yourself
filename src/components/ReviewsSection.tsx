@@ -103,7 +103,7 @@ const ReviewsSection = () => {
           {/* Кнопка вліво */}
           <button
             onClick={scrollLeft}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white border-2 shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center flex-shrink-0"
+            className="absolute left-0 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 rounded-full border-2 bg-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:flex items-center justify-center flex-shrink-0"
             style={{ borderColor: '#75DEAF', color: '#0C5C38' }}
             aria-label="Попередній відгук"
           >
@@ -115,15 +115,15 @@ const ReviewsSection = () => {
           {/* Контейнер з відгуками */}
           <div 
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-14 items-start"
+            className="flex items-start gap-4 sm:gap-6 overflow-x-auto scrollbar-hide scroll-smooth pb-4 px-0 md:px-14"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {reviews.map((review, index) => (
               <div 
                 key={index}
                 data-review-index={index}
-                className="flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-xl transition-all relative overflow-hidden group grain-texture grain-texture-white flex flex-col"
-                style={{ borderColor: '#E5E5E5', minWidth: '300px', height: 'auto' }}
+                className="flex flex-col flex-shrink-0 w-[calc(100%-8px)] min-w-0 max-w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] p-6 sm:p-8 rounded-2xl bg-white border-2 shadow-md hover:shadow-xl transition-all relative overflow-hidden group grain-texture grain-texture-white"
+                style={{ borderColor: '#E5E5E5', minWidth: '0', height: 'auto' }}
               >
                 <div className="absolute top-0 right-0 w-24 h-24 rounded-full opacity-5 group-hover:opacity-15 transition-opacity" style={{ backgroundColor: '#75DEAF', transform: 'translate(30%, -30%)' }}></div>
                 <div className="absolute bottom-0 left-0 w-16 h-16 rounded-full opacity-5 group-hover:opacity-10 transition-opacity" style={{ backgroundColor: '#0C5C38', transform: 'translate(-20%, 20%)' }}></div>
@@ -156,7 +156,7 @@ const ReviewsSection = () => {
           {/* Кнопка вправо */}
           <button
             onClick={scrollRight}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-white border-2 shadow-lg hover:shadow-xl transition-all hover:scale-110 flex items-center justify-center flex-shrink-0"
+            className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 -translate-y-1/2 rounded-full border-2 bg-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:flex items-center justify-center flex-shrink-0"
             style={{ borderColor: '#75DEAF', color: '#0C5C38' }}
             aria-label="Наступний відгук"
           >
