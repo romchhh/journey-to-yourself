@@ -1,15 +1,20 @@
 "use client";
 
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import Header from '@/components/Header';
+import { clearPendingPayment } from '@/utils/order';
 
 export const dynamic = 'force-dynamic';
 
 const PaymentFailureContent = () => {
   const searchParams = useSearchParams();
   const orderRef = searchParams.get('orderRef') || '';
+
+  useEffect(() => {
+    clearPendingPayment();
+  }, []);
 
   return (
     <div className="min-h-screen bg-white">

@@ -12,6 +12,7 @@ import {
   isPurchaseAlreadySent, 
   markPurchaseAsSent 
 } from '@/utils/facebookTracking';
+import { clearPendingPayment } from '@/utils/order';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,6 +44,8 @@ const PaymentSuccessContent = () => {
     : 'https://t.me/Workshop_Journey_To_Yourself_Bot?start=self_access';
 
   useEffect(() => {
+    clearPendingPayment();
+
     // Skip if no orderRef
     if (!orderRef) {
       console.warn('[FB Tracking] No orderRef provided, skipping Purchase tracking');

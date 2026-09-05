@@ -1,163 +1,119 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { parseTariffFromOrderRef, type TariffType } from '@/utils/order';
+import { getSiteUrl } from '@/utils/siteUrl';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
+function resolveTariff(
+  orderRef: string,
+  explicit: string | null | undefined
+): TariffType {
+  if (explicit === 'psychologist' || explicit === 'self') return explicit;
+  return parseTariffFromOrderRef(orderRef);
+}
+
+function isPaymentSuccess(transactionStatus: string, reasonCode: string | number): boolean {
+  return (
+    transactionStatus === 'Approved' ||
+    transactionStatus === 'approved' ||
+    reasonCode === '1100' ||
+    reasonCode === 1100
+  );
+}
+
 export async function GET(request: NextRequest) {
   try {
-    console.log('[PAYMENT RETURN] Received GET to payment return URL');
-
     const url = new URL(request.url);
     const orderRef = url.searchParams.get('orderRef') || '';
-    const tariffType = url.searchParams.get('tariffType') || 'self';
-    const transactionStatus = url.searchParams.get('transactionStatus') || 
-                             url.searchParams.get('status') || 
-                             '';
+    const tariffType = resolveTariff(orderRef, url.searchParams.get('tariffType'));
+    const transactionStatus =
+      url.searchParams.get('transactionStatus') || url.searchParams.get('status') || '';
     const reasonCode = url.searchParams.get('reasonCode') || '';
 
-    console.log('[PAYMENT RETURN] GET params:', {
-      orderRef,
-      tariffType,
-      transactionStatus,
-      reasonCode,
-      allParams: Object.fromEntries(url.searchParams.entries()),
-    });
+    const origin = getSiteUrl(request);
 
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    
-    // Перевіряємо статус транзакції
-    // WayForPay: transactionStatus === 'Approved' або reasonCode === '1100' означає успішну оплату
-    const isSuccess = transactionStatus === 'Approved' || 
-                     transactionStatus === 'approved' || 
-                     reasonCode === '1100';
-    
-    if (isSuccess) {
+    if (isPaymentSuccess(transactionStatus, reasonCode)) {
       const queryParams = new URLSearchParams();
       if (orderRef) queryParams.set('orderRef', orderRef);
       queryParams.set('tariffType', tariffType);
-      const successUrl = new URL(`/payment/success/${tariffType}?${queryParams.toString()}`, origin).toString();
-      console.log('[PAYMENT RETURN] GET redirect to success:', successUrl);
-      return NextResponse.redirect(successUrl, 303);
-    } else {
-      // Неуспішна оплата або статус не вказано
-      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-      const failureUrl = new URL(`/payment/failure${query}`, origin).toString();
-      console.log('[PAYMENT RETURN] GET redirect to failure:', failureUrl);
-      return NextResponse.redirect(failureUrl, 303);
+      return NextResponse.redirect(
+        new URL(`/payment/success/${tariffType}?${queryParams}`, origin).toString(),
+        303
+      );
     }
+
+    const query = orderRef ? `?orderRef=${encodeURIComponent(orderRef)}` : '';
+    return NextResponse.redirect(new URL(`/payment/failure${query}`, origin).toString(), 303);
   } catch (error) {
     console.error('[PAYMENT RETURN] GET Error:', error);
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    // При помилці редіректимо на failure сторінку
+    const origin = getSiteUrl(request);
     return NextResponse.redirect(new URL('/payment/failure', origin).toString(), 303);
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('[PAYMENT RETURN] Received POST to payment return URL');
-
     const contentType = (request.headers.get('content-type') || '').toLowerCase();
-    let data: Record<string, any> = {};
-
-    // Логуємо деталі запиту
-    console.log('[PAYMENT RETURN] Content-Type:', contentType);
-    console.log('[PAYMENT RETURN] Headers:', {
-      contentType: request.headers.get('content-type'),
-      userAgent: request.headers.get('user-agent'),
-      host: request.headers.get('host'),
-    });
+    let data: Record<string, unknown> = {};
 
     if (contentType.includes('application/json')) {
       data = await request.json();
-      console.log('[PAYMENT RETURN] Parsed JSON data:', data);
     } else if (
       contentType.includes('application/x-www-form-urlencoded') ||
       contentType.includes('multipart/form-data')
     ) {
       const form = await request.formData();
-      form.forEach((value: FormDataEntryValue, key: string) => {
+      form.forEach((value, key) => {
         data[key] = value;
       });
-      console.log('[PAYMENT RETURN] Parsed form data:', data);
     } else {
       try {
         const text = await request.text();
-        console.log('[PAYMENT RETURN] Raw text body length:', text?.length || 0);
         data = text ? JSON.parse(text) : {};
-      } catch (e) {
-        console.log('[PAYMENT RETURN] Could not parse body as JSON');
+      } catch {
         data = {};
       }
     }
 
-    // Шукаємо orderRef у різних можливих полях
-    const orderRef =
+    const orderRef = String(
       data.orderRef ||
-      data.orderReference ||
-      data.order_id ||
-      data.order ||
-      data.ORDER_ID ||
-      '';
+        data.orderReference ||
+        data.order_id ||
+        data.order ||
+        data.ORDER_ID ||
+        ''
+    );
 
-    // Шукаємо статус транзакції
-    const transactionStatus =
-      data.transactionStatus ||
-      data.status ||
-      data.transaction_status ||
-      data.STATUS ||
-      '';
+    const transactionStatus = String(
+      data.transactionStatus || data.status || data.transaction_status || data.STATUS || ''
+    );
 
-    // Шукаємо reasonCode (1100 означає успішну оплату)
-    const reasonCode =
-      data.reasonCode ||
-      data.reason_code ||
-      data.REASON_CODE ||
-      String(data.reasonCode || '');
+    const reasonCode = (data.reasonCode ?? data.reason_code ?? data.REASON_CODE ?? '') as
+      | string
+      | number;
 
-    console.log('[PAYMENT RETURN] Extracted data:', {
-      orderRef,
-      transactionStatus,
-      reasonCode,
-      allData: data,
-    });
+    // Tariff from orderRef (encoded at create) — no database
+    const url = new URL(request.url);
+    const tariffType = resolveTariff(orderRef, url.searchParams.get('tariffType'));
 
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
-    
-    // Перевіряємо статус транзакції
-    // WayForPay: transactionStatus === 'Approved' або reasonCode === '1100' означає успішну оплату
-    const isSuccess = transactionStatus === 'Approved' || 
-                     transactionStatus === 'approved' || 
-                     reasonCode === '1100' ||
-                     reasonCode === 1100;
-    
-    if (isSuccess) {
-      // Для POST запитів від WayForPay використовуємо orderRef для визначення типу тарифу
-      // Або можна використати дефолтний 'self', але краще передати через query параметр з GET запиту
+    const origin = getSiteUrl(request);
+
+    if (isPaymentSuccess(transactionStatus, reasonCode)) {
       const queryParams = new URLSearchParams();
       if (orderRef) queryParams.set('orderRef', orderRef);
-      // Якщо немає tariffType в даних, використовуємо 'self' як дефолт
-      const tariffType = 'self'; // Можна визначити за orderRef або зберігати в БД
       queryParams.set('tariffType', tariffType);
-      const successUrl = new URL(`/payment/success/${tariffType}?${queryParams.toString()}`, origin).toString();
-      console.log('[PAYMENT RETURN] POST redirect to success:', successUrl);
-      return NextResponse.redirect(successUrl, 303);
-    } else {
-      // Неуспішна оплата або статус не вказано
-      const query = orderRef ? `?orderRef=${encodeURIComponent(String(orderRef))}` : '';
-      const failureUrl = new URL(`/payment/failure${query}`, origin).toString();
-      console.log('[PAYMENT RETURN] POST redirect to failure:', failureUrl);
-      return NextResponse.redirect(failureUrl, 303);
+      return NextResponse.redirect(
+        new URL(`/payment/success/${tariffType}?${queryParams}`, origin).toString(),
+        303
+      );
     }
+
+    const query = orderRef ? `?orderRef=${encodeURIComponent(orderRef)}` : '';
+    return NextResponse.redirect(new URL(`/payment/failure${query}`, origin).toString(), 303);
   } catch (error) {
     console.error('[PAYMENT RETURN] POST Error:', error);
-    console.error('[PAYMENT RETURN] Error details:', {
-      message: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-
-    // При помилці редіректимо на failure сторінку
-    const origin = process.env.NEXT_PUBLIC_SITE_URL || `https://${request.headers.get('host')}`;
+    const origin = getSiteUrl(request);
     return NextResponse.redirect(new URL('/payment/failure', origin).toString(), 303);
   }
 }
